@@ -1,0 +1,149 @@
+[
+{
+    "array" : "0",
+    "cartNumber" :"10038",
+    "cartVersion" :"25.38.12",
+    "SroreName" :"Yohananof",
+    "dailyBarcode" : "1917386240248"
+},
+
+{
+    "array" : "1",
+    "testName" : "testFile1,testFile11,testFile12",
+    "itemBarcode":"5904941751920",
+    "itemName" :"משקה אנרגיה בלו דיי",
+    "itemWeight" :"0.275",
+    "itemTag" : "Should expect weight & Allow Quantity Change",
+    "itemPrice" : "₪4.20"
+},
+
+{
+    "array" : "2",
+    "testName" : "testFile1,testFile11,testFile12",
+    "itemBarcode":"72940761",
+    "itemName" :"מילקי בטעם שוקולד",
+    "itemWeight" :"0.142",
+    "itemTag" : "Should expect weight & Is quantity",
+    "itemPrice" : "₪2.90"
+},
+
+{
+    "array" : "3",
+    "testName" : "testFile2",
+    "itemBarcode":"4100130937163",
+    "itemName" :"בירה בקס שישייה 275",
+    "itemWeight" :"2.717",
+    "itemTag" : "Should expect weight & Allow Quantity Change & Age Restriction",
+    "itemPrice" : "₪29.90"
+},
+
+{
+    "array" : "4",
+    "testName" : "testFile2",
+    "itemBarcode":"7290104729492",
+    "itemName" :"שוקולד חלב חמישיה",
+    "itemWeight" :"0.523",
+    "itemTag" : "Should expect weight & Allow Quantity Change",
+    "itemPrice" : "₪18.90"
+},
+
+{
+    "array" : "5",
+    "testName" : "testFile3",
+    "itemBarcode":"80050025",
+    "itemName" :"טיק טק תפוז",
+    "itemWeight" :"0.056",
+    "itemTag" : "Should expect weight & Is lightweight",
+    "itemPrice" : "₪3.20"
+},
+
+{
+    "array" : "6",
+    "testName" : "testFile3",
+    "itemBarcode":"2220",
+    "itemName" :"מים מינרלים גדול",
+    "itemWeight" :"1.547",
+    "itemTag" : "Should expect weight & Is non scannable & Allow Quantity Change",
+    "itemPrice" : "₪2.50"
+},
+
+{
+    "array" : "7",
+    "testName" : "testFile4,testFile5,testFile7,testFile8",
+    "itemBarcode":"7290112334749",
+    "itemName" :"קפה טורקי שקית 200",
+    "itemWeight" :"0.233",
+    "itemTag" : "Should expect weight & Allow Quantity Change",
+    "itemPrice" : "₪14.90"
+},
+
+{
+    "array" : "8",
+    "testName" : "testFile6",
+    "itemBarcode":"7290000525969",
+    "itemName" :"מיץ תפוזים סחוט 1 לי",
+    "itemWeight" :"1.092",
+    "itemTag" : "Should expect weight & Allow Quantity Change",
+    "itemPrice" : "₪14.90"
+},
+
+{
+    "array" : "9",
+    "testName" : "testFile6",
+    "itemBarcode":"7290000948553",
+    "itemName" :"קופון יוחננוף פרימור",
+    "itemWeight" :"",
+    "itemTag" : "",
+    "itemPrice" : "₪0.01"
+},
+
+{
+    "array" : "10",
+    "testName" : "testFile9",
+    "itemInstoreBarcode":"3500062000564011520000",
+    "itemName" :"בצל יבש",
+    "itemWeight" :"1.152",
+    "itemTag" : "",
+    "itemPrice" : "₪5.64"
+},
+
+{
+    "array" : "11",
+    "testName" : "testFile9",
+    "itemInstoreBarcode":"7290017947921",
+    "itemName" :"שישיית לחמניות המבור",
+    "itemWeight" :"0.583",
+    "itemTag" : "",
+    "itemPrice" : "₪14.90"
+},
+
+{
+    "array" : "12",
+    "testName" : "testFile9",
+    "itemInstoreBarcode":"2700142601200000010000",
+    "itemName" :"מארז בייגלה 3 יח",
+    "itemWeight" :"0.350",
+    "itemTag" : "",
+    "itemPrice" : "₪12.00"
+},
+
+{
+    "array" : "13",
+    "testName" : "testFile11",
+    "itemInstoreBarcode":"7290015514866",
+    "itemName" :"שקית גופיה בודד.",
+    "itemWeight" :"0.007",
+    "itemTag" : "Is non scannable & Allow Quantity Change",
+    "itemPrice" : "₪0.10"
+},
+{
+    "array" : "14",
+    "testName" : "testFile16",
+    "itemInstoreBarcode":"",
+    "itemName" :"בצל יבש",
+    "itemWeight" :"0.200",
+    "itemTag" : "",
+    "itemPrice" : "₪4.90"
+}
+
+]

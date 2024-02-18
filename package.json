@@ -1,0 +1,22 @@
+{
+  "name": "playwright-automation-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:sequence": "npx playwright test tests/ --workers=1"
+  },
+  "keywords": [],
+  "author": "Itzik Reuven",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.41.1",
+    "@types/node": "^20.9.4",
+    "allure-playwright": "^2.4.0"
+  },
+  "dependencies": {
+    "newman": "^5.3.2",
+    "newman-reporter-htmlextra": "^1.22.11",
+    "package.json": "^2.0.1"
+  }
+}

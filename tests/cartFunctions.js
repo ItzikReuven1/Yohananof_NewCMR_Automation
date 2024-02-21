@@ -332,3 +332,16 @@ export const weightableItem  = async (itemName,itemPrice,itemWeight,status) => {
   await window.getByText('אשרו והעבירו לעגלה').click();
   }
 };
+
+////Personal Bag message////
+export const personalBagMessage  = async (cont) => {
+  const { window } = sharedContext;
+  await expect(window.getByRole('img', { name: 'Help Circle', exact: true })).toBeVisible();
+  await expect(window.getByText('האם הסרתם חפצים אישיים?')).toBeVisible();
+  await expect(window.getByText('יש להחזיר את החפצים האישיים לעגלה, או ללחוץ להמשיך בלעדיהם')).toBeVisible();
+  await expect(window.getByRole('button', { name: 'להמשיך בלעדיהם' })).toBeVisible();
+  if (cont === 'Ok') {
+    await window.getByRole('button', { name: 'להמשיך בלעדיהם' }).click();
+   }
+
+};

@@ -22,6 +22,7 @@ await runTest(async (testInfo) => {
     await addWeightMessage('Info','Help');
     await window.waitForTimeout(2000);
     await sendSecurityScale(0.250);
+    await window.waitForTimeout(2000);
     await sendSecurityScale(0.100);
     await personalBagMessage();
     await window.waitForTimeout(2000);
@@ -33,7 +34,7 @@ await runTest(async (testInfo) => {
     await sendSecurityScale(0.150);
     await personalBagMessage('Ok');
     await window.waitForTimeout(2000);
-    await sendSecurityScale(0.250);
+    await sendSecurityScale(0.300);
     await addWeightMessage();
     await sendSecurityScale(0.150);
     await window.waitForTimeout(2000);
@@ -49,11 +50,6 @@ await runTest(async (testInfo) => {
     const itemWeight2 = parseFloat(dataset[4].itemWeight);
     weigthCalc=itemWeight2 + weigthCalc;
     await sendSecurityScale(weigthCalc);
-    ///Price Calculation
-    // const itemPrice1 = parseFloat(dataset[3].itemPrice);
-    // const itemPrice2 = parseFloat(dataset[4].itemPrice);
-    // const priceCalc=itemPrice2 + itemPrice1;
-    // await sendSecurityScale(3.24);
     await window.waitForTimeout(2000);
 
     //await expect(window.getByText('שוקולד חלב חמישיהסה"כ₪18.90מחיר ליח\' :₪18.90כמות1')).toBeVisible();
@@ -86,6 +82,6 @@ await runTest(async (testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(7000);
+    await window.waitForTimeout(60000);
   }, 'test 17 - Add & Remove PersonalBag with Sale',testInfo);
   });

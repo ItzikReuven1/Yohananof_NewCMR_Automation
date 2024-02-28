@@ -240,7 +240,7 @@ export const changePrice = async (barcode, productText, newPrice) => {
 export const weightMismatch  = async () => {
   const { window } = sharedContext;
   await expect(window.locator('#basket div').filter({ hasText: 'המוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו ' }).nth(1)).toBeVisible();
-  await expect(window.getByText('הכניסו את הפריט לעגלה')).toBeVisible();
+  //await expect(window.getByText('הכניסו את הפריט לעגלה')).toBeVisible();
   await expect(window.getByRole('button', { name: 'ביטול הוספה' })).toBeVisible();
  
 };

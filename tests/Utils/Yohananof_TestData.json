@@ -4,7 +4,7 @@
     "cartNumber" :"10038",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1912310400248"
+    "dailyBarcode" : "1913787648248"
 },
 
 {
@@ -120,11 +120,11 @@
 {
     "array" : "12",
     "testName" : "testFile9",
-    "itemInstoreBarcode":"2700142601200000010000",
+    "itemInstoreBarcode":"2700142601200000030000",
     "itemName" :"מארז בייגלה 3 יח",
-    "itemWeight" :"0.350",
+    "itemWeight" :"0.320",
     "itemTag" : "",
-    "itemPrice" : "₪12.00"
+    "itemPrice" : "₪36.00"
 },
 
 {

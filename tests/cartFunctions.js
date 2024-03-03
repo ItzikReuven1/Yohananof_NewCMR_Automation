@@ -207,13 +207,19 @@ export const restoreSuccessful  = async () => {
 };
 
 ////Change Price////
-export const changePrice = async (barcode, productText, newPrice) => {
+export const changePrice = async (barcode, productText, newPrice,weightableItem) => {
   const { window } = sharedContext;
   await window.getByText('שינוי מחיר').click();
   await expect(window.getByText('שינוי מחיר1חיפוש פריט2בחירת פריט3שינוי מחיר4סיום')).toBeVisible();
   await expect(window.getByText('בחירת פריטסריקת ברקודהקלדת ברקוד בחרו מסל הקנייה')).toBeVisible();
   await expect(window.getByRole('button', { name: 'chevron back outline חזרה' })).toBeVisible();
+  if (weightableItem === 'weightableItem')
+  {
+    await window.getByRole('button', { name: 'בחרו מסל הקנייה' }).click();
+    await window.getByRole('button', { name: 'בחירה' }).click();
+  } else {
   await scanBarcode(barcode);
+  }
   //await expect(window.getByText('שינוי מחירחיפוש פריטבחירת פריט3שינוי מחיר4סיום')).toBeVisible();
   await expect(window.locator('.item-line')).toContainText(productText);
 
@@ -318,7 +324,7 @@ export const addWeightMessage  = async (info,help) => {
 export const weightableItem  = async (itemName,itemPrice,itemWeight,status) => {
   const { window } = sharedContext;
   await window.locator('ion-button').filter({ hasText: `${itemName}`}).locator('img').click();
-  await expect(window.locator("xpath=/html/body/app-root/ion-app/ion-modal/app-plu-item/div/div[1]").getByText('בצל יבש')).toBeVisible();
+  await expect(window.locator("xpath=/html/body/app-root/ion-app/ion-modal/app-plu-item/div/div[1]").getByText(itemName)).toBeVisible();
   await expect(window.getByText('Alert Circleהניחו את הפריט על המשקל')).toBeVisible();
   await expect(window.locator('.message-insert-init').first()).toBeVisible();
   await expect(window.locator("xpath=/html/body/app-root/ion-app/ion-modal/app-plu-item/div/div[2]/app-plu-legal-scale/div/div[1]")).toContainText(itemPrice);
@@ -330,6 +336,7 @@ export const weightableItem  = async (itemName,itemPrice,itemWeight,status) => {
   else
   {
   await window.getByText('אשרו והעבירו לעגלה').click();
+  await sendLegalScale(0.00);
   }
 };
 
@@ -344,4 +351,18 @@ export const personalBagMessage  = async (cont) => {
     await window.getByRole('button', { name: 'להמשיך בלעדיהם' }).click();
    }
 
+};
+
+////Import Transaction////
+export const importTrs = async (store) => {
+  const { window } = sharedContext;
+  await window.getByText('ייבוא עסקה').click();
+  await expect(window.getByText('Closeייבוא עסקה')).toBeVisible();
+  await expect(window.getByText('הזינו את מספר הקופה או עגלה בה נוצרה העסקה שתרצו לשחזר')).toBeVisible();
+  await window.locator("xpath=/html/body/app-root/ion-app/ion-modal[2]/app-process-modal/div/div/div/app-process-type-barcode/app-digit-keyboard/div/div/div[2]").getByText('1').click();
+  await window.getByRole('button', { name: '0' }).click();
+  await window.getByRole('button', { name: '0' }).click();
+  await window.getByRole('button', { name: '3' }).click();
+  await window.getByRole('button', { name: '8' }).click();
+  await window.getByText('המשך').click();
 };

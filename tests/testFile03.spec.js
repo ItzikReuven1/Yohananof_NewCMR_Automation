@@ -18,14 +18,14 @@ test('test 03 - Light Weight Item & Change Price', async ({}, testInfo)=> {
     await startTrs();
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[5].itemBarcode);
-    await window.waitForTimeout(10000);
+    await window.waitForTimeout(3000);
     await sendSecurityScale(dataset[5].itemWeight);
     await window.waitForTimeout(2000);
     //
     await window.locator('ion-button').filter({ hasText: 'משקאות' }).locator('svg').click();
     await window.waitForTimeout(2000);
     await window.locator('ion-button').filter({ hasText: 'מים מינרלים גדול' }).locator('img').click();
-    await window.waitForTimeout(4000);
+    await window.waitForTimeout(3000);
      ////weight Calcultion
      const itemWeight1 = parseFloat(dataset[5].itemWeight);
      const itemWeight2 = parseFloat(dataset[6].itemWeight);

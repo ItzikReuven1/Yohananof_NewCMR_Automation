@@ -4,7 +4,7 @@
     "cartNumber" :"10038",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1913787648248"
+    "dailyBarcode" : "1917215872248"
 },
 
 {
@@ -138,8 +138,8 @@
 },
 {
     "array" : "14",
-    "testName" : "testFile16",
-    "itemInstoreBarcode":"",
+    "testName" : "testFile16,testFile18",
+    "itemInstoreBarcode":"620",
     "itemName" :"בצל יבש",
     "itemWeight" :"0.200",
     "itemTag" : "",
@@ -147,8 +147,8 @@
 },
 {
     "array" : "14",
-    "testName" : "testFile17",
-    "itemInstoreBarcode":"",
+    "testName" : "testFile18",
+    "itemInstoreBarcode":"343",
     "itemName" :"גזר בתפזורת",
     "itemWeight" :"0.350",
     "itemTag" : "",

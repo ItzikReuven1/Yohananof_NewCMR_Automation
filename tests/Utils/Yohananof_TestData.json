@@ -4,7 +4,7 @@
     "cartNumber" :"10038",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1917215872248"
+    "dailyBarcode" : "1910170368248"
 },
 
 {
@@ -14,7 +14,9 @@
     "itemName" :"משקה אנרגיה בלו דיי",
     "itemWeight" :"0.275",
     "itemTag" : "Should expect weight & Allow Quantity Change",
-    "itemPrice" : "₪4.20"
+    "itemPrice" : "₪4.20",
+    "promotionName" :"בלו דיי 4 ב12",
+    "promotion" : "4.80"
 },
 
 {
@@ -51,10 +53,10 @@
     "array" : "5",
     "testName" : "testFile3",
     "itemBarcode":"80050025",
-    "itemName" :"טיק טק תפוז",
+    "itemName" :"טיק טק בטעם תפוז",
     "itemWeight" :"0.056",
     "itemTag" : "Should expect weight & Is lightweight",
-    "itemPrice" : "₪3.20"
+    "itemPrice" : "₪3.50"
 },
 
 {
@@ -64,34 +66,38 @@
     "itemName" :"מים מינרלים גדול",
     "itemWeight" :"1.547",
     "itemTag" : "Should expect weight & Is non scannable & Allow Quantity Change",
-    "itemPrice" : "₪2.50"
+    "itemPrice" : "₪2.50",
+    "promotionName" :"מים מינרלים 4ב9",
+    "promotion" : "1.00"
 },
 
 {
     "array" : "7",
     "testName" : "testFile4,testFile5,testFile7,testFile8",
-    "itemBarcode":"7290112334749",
-    "itemName" :"קפה טורקי שקית 200",
-    "itemWeight" :"0.233",
+    "itemBarcode":"7290014704602",
+    "itemName" :"מארז קפה טורקי יוחננוף 3*85 גרם",
+    "itemWeight" :"0.255",
     "itemTag" : "Should expect weight & Allow Quantity Change",
-    "itemPrice" : "₪14.90"
+    "itemPrice" : "₪13.90",
+    "promotionName" :"קפה שלישייה 2ב22",
+    "promotion" : "5.80"
 },
 
 {
     "array" : "8",
     "testName" : "testFile6",
-    "itemBarcode":"7290000525969",
-    "itemName" :"מיץ תפוזים סחוט 1 לי",
-    "itemWeight" :"1.092",
+    "itemBarcode":"7290110568276",
+    "itemName" :"יטבתה פרו וניל 350",
+    "itemWeight" :"0.350",
     "itemTag" : "Should expect weight & Allow Quantity Change",
-    "itemPrice" : "₪14.90"
+    "itemPrice" : "₪6.90"
 },
 
 {
     "array" : "9",
     "testName" : "testFile6",
-    "itemBarcode":"7290000948553",
-    "itemName" :"קופון יוחננוף פרימור",
+    "itemBarcode":"7200001645894",
+    "itemName" :"קופון יוחננוף משקה חלב פרו 350",
     "itemWeight" :"",
     "itemTag" : "",
     "itemPrice" : "₪0.01"
@@ -104,7 +110,7 @@
     "itemName" :"בצל יבש",
     "itemWeight" :"1.152",
     "itemTag" : "",
-    "itemPrice" : "₪5.64"
+    "itemPrice" : "₪5.90"
 },
 
 {
@@ -143,7 +149,7 @@
     "itemName" :"בצל יבש",
     "itemWeight" :"0.200",
     "itemTag" : "",
-    "itemPrice" : "₪4.90"
+    "itemPrice" : "₪5.90"
 },
 {
     "array" : "14",
@@ -152,7 +158,7 @@
     "itemName" :"גזר בתפזורת",
     "itemWeight" :"0.350",
     "itemTag" : "",
-    "itemPrice" : "₪4.90"
+    "itemPrice" : "₪5.90"
 }
 
 ]

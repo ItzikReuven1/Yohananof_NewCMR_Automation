@@ -55,6 +55,8 @@ test('test 09 - InstoreBarcode items with weight Mismatch', async ({}, testInfo)
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     //
+    await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText('Pricetagsתיקון מחיר- ₪1.15');
+
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[10].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[10].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText('משקל1.152 ק"ג');
@@ -69,9 +71,9 @@ test('test 09 - InstoreBarcode items with weight Mismatch', async ({}, testInfo)
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[12].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('3');
 
-    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪24.00' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (5 פריטים) ₪32.54' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪32.54').click();
+    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪25.15' }).nth(1)).toBeVisible();
+    await expect(window.getByRole('button', { name: 'תשלום (5 פריטים) ₪32.55' })).toBeVisible();
+    await window.getByRole('contentinfo').getByText('₪32.55').click();
     //
     await window.waitForTimeout(3000);
     await expect(window.getByText('5העגלה שלי')).toBeVisible();
@@ -87,9 +89,11 @@ test('test 09 - InstoreBarcode items with weight Mismatch', async ({}, testInfo)
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(4)')).toContainText(dataset[10].itemName);
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(4)')).toContainText('בצל יבש1.152 ק"ג₪');
-    await expect(window.getByText('חסכון (מבצעים והנחות) -₪24.00')).toBeVisible();
-    await expect(window.getByText('סה"כ לתשלום ₪32.54')).toBeVisible();
-    await expect(window.getByText('תשלום₪32.54')).toBeVisible();
+
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(5)')).toContainText(('Pricetagsתיקון מחיר-₪1.15'));
+    await expect(window.getByText('חסכון (מבצעים והנחות) -₪25.15')).toBeVisible();
+    await expect(window.getByText('סה"כ לתשלום ₪32.55')).toBeVisible();
+    await expect(window.getByText('תשלום₪32.55')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     await scanAdminBarcode();
     await window.waitForTimeout(2000);

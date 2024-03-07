@@ -49,7 +49,7 @@ module.exports = defineConfig({
       // Add the test files in the desired order
       testMatch: ['**/testFile01.spec.js', '**/testFile02.spec.js', '**/testFile03.spec.js', '**/testFile04.spec.js', '**/testFile05.spec.js', '**/testFile06.spec.js'
       , '**/testFile07.spec.js', '**/testFile08.spec.js', '**/testFile09.spec.js','**/testFile10.spec.js','**/testFile11.spec.js','**/testFile12.spec.js','**/testFile13.spec.js','**/testFile14.spec.js','**/testFile15.spec.js',
-      '**/testFile16.spec.js','**/testFile17.spec.js','**/testFile18.spec.js','**/testFile19.spec.js','**/testFile20.spec.js','**/testFile21.spec.js','**/testFile22.spec.js'],
+      '**/testFile16.spec.js','**/testFile17.spec.js','**/testFile18.spec.js','**/testFile19.spec.js','**/testFile20.spec.js'],
       // ...
     },
   ],

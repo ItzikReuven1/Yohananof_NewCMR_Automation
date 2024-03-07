@@ -51,11 +51,11 @@ test('test 13 - Cart Lock & Unlock & Sale', async ({}, testInfo)=> {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[6].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down1');
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪5.70' })).toBeVisible();
+    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪6.00' })).toBeVisible();
     await scanAdminBarcode();
     await changePrice(dataset[6].itemBarcode,dataset[6].itemName,'150');
     //
-    await window.getByRole('contentinfo').getByText('₪4.70').click();
+    await window.getByRole('contentinfo').getByText('₪5.00').click();
     //
     await window.waitForTimeout(3000);
     await expect(window.getByText('2העגלה שלי')).toBeVisible();
@@ -63,10 +63,10 @@ test('test 13 - Cart Lock & Unlock & Sale', async ({}, testInfo)=> {
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪1.50');
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[5].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X1 ₪3.20');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X1 ₪3.50');
 
-    await expect(window.getByText('סה"כ לתשלום ₪4.70')).toBeVisible();
-    await expect(window.getByText('תשלום₪4.70')).toBeVisible();
+    await expect(window.getByText('סה"כ לתשלום ₪5.00')).toBeVisible();
+    await expect(window.getByText('תשלום₪5.00')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     await scanAdminBarcode();
     await window.waitForTimeout(2000);

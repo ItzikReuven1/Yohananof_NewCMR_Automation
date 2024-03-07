@@ -9,7 +9,7 @@ const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.js
 test.beforeAll(setupElectron);
 //test.afterAll(teardownElectron);
 
-test('test 20 - Import Transaction part 1', async ({}, testInfo) => {
+test('test 21 - Import Transaction part 1', async ({}, testInfo) => {
   await runTest(async (testInfo) => {
     const { window } = sharedContext;
     test.setTimeout(90000);
@@ -35,6 +35,6 @@ test('test 20 - Import Transaction part 1', async ({}, testInfo) => {
     await window.waitForTimeout(5000);
     await teardownElectron();
 
-  }, 'test 20 - Import Transaction part 1',testInfo);
+  }, 'test 21 - Import Transaction part 1',testInfo);
   });
     

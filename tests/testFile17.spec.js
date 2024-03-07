@@ -7,7 +7,7 @@ const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 
 test.beforeAll(setupElectron);
-test.afterAll(teardownElectron);
+//test.afterAll(teardownElectron);
 
 test('test 17 - Add & Remove PersonalBag with Sale', async ({}, testInfo) => {
 await runTest(async (testInfo) => {

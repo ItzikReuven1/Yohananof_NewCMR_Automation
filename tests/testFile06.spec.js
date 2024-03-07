@@ -23,30 +23,30 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await window.waitForTimeout(2000);
     //
     await window.getByText('1', { exact: true }).click();
-    await changeQuantity('Add',1);
+    await changeQuantity('Add',4);
     await window.waitForTimeout(2000);
-    await sendSecurityScale(2.148);
+    await sendSecurityScale(1.75);
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[9].itemBarcode);
     await window.waitForTimeout(2000);
 
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[8].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[8].itemPrice);
-    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Caret UpCaret Down2');
+    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Caret UpCaret Down5');
   
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[9].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[9].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות1');
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (3 פריטים) ₪29.81' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪29.81').click();
+    await expect(window.getByRole('button', { name: 'תשלום (6 פריטים) ₪34.51' })).toBeVisible();
+    await window.getByRole('contentinfo').getByText('₪34.51').click();
 
     
     await window.getByText('המשך').click();
 
     await window.waitForTimeout(2000);
     await window.getByRole('button', { name: 'דילוג' }).click();
-    await expect(window.getByText('Pricetagsקופון פרימור 2 ב22-₪7.82')).toBeVisible();
+    await expect(window.getByText('Pricetagsקופון משקה חלב 5ב25-₪9.52')).toBeVisible();
 
     
     await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
@@ -60,18 +60,18 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await window.waitForTimeout(2000);
 
 
-    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪7.82' }).nth(1)).toBeVisible();
-    await window.getByText('₪21.99').click();
+    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪9.52' }).nth(1)).toBeVisible();
+    await window.getByText('₪24.99').click();
     await window.waitForTimeout(2000);
-    await expect(window.getByText('3העגלה שלי')).toBeVisible();
+    await expect(window.getByText('6העגלה שלי')).toBeVisible();
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[9].itemName);
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪0.01');
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[8].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X2 ₪29.80');
-    await expect(window.getByText('Pricetagsקופון פרימור 2 ב22-₪7.82')).toBeVisible();
-    await expect(window.getByText('חסכון (מבצעים והנחות) -₪7.82')).toBeVisible();
-    await expect(window.getByText('סה"כ לתשלום ₪21.99')).toBeVisible();
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X5 ₪34.50');
+    await expect(window.getByText('Pricetagsקופון משקה חלב 5ב25-₪9.52')).toBeVisible();
+    await expect(window.getByText('חסכון (מבצעים והנחות) -₪9.52')).toBeVisible();
+    await expect(window.getByText('סה"כ לתשלום ₪24.99')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     await scanAdminBarcode();
     await window.waitForTimeout(2000);

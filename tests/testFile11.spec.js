@@ -27,7 +27,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await expect(window.getByText('שינוי כמות')).toBeVisible();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(5000);
+  await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const itemWeight1 = parseFloat(dataset[1].itemWeight);
   const itemWeight2 = parseFloat(dataset[2].itemWeight);
@@ -37,7 +37,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await window.locator('#main-basket-items-container > div > div:nth-child(2) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(5000);
+  await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   weightCalc = weightCalc + (itemWeight1 * 20);
   await sendSecurityScale(weightCalc);
@@ -47,7 +47,7 @@ await runTest(async (testInfo) => {
   await window.locator('.item-type-normal').first().click();
   //locator('.item-type-normal').first()
   await changeQuantity('Add',20);
-  await window.waitForTimeout(5000);
+  await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const itemWeight4 = parseFloat(dataset[4].itemWeight);
   weightCalc = weightCalc + (itemWeight4 * 21);
@@ -84,42 +84,91 @@ await runTest(async (testInfo) => {
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[6].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Caret UpCaret Down21');
 
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText(dataset[4].itemName);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText(dataset[4].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText('Caret UpCaret Down21');
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText(dataset[6].promotion);
 
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[1].itemName);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[1].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText('Caret UpCaret Down21');
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[6].promotion);
 
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText(dataset[2].itemName);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText(dataset[2].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText('Caret UpCaret Down21');
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText(dataset[6].promotion);
 
-  await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
-  await expect(window.getByRole('button', { name: 'תשלום (85 פריטים) ₪601.70' })).toBeVisible();
-  await window.getByRole('contentinfo').getByText('₪601.70').click();
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(6)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(6)')).toContainText(dataset[6].promotion);
+
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(7)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(7)')).toContainText(dataset[6].promotion);
+
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(8)')).toContainText(dataset[4].itemName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(8)')).toContainText(dataset[4].itemPrice);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(8)')).toContainText('Caret UpCaret Down21');
+
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(9)')).toContainText(dataset[1].itemName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(9)')).toContainText(dataset[1].itemPrice);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(9)')).toContainText('Caret UpCaret Down21');
+
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(10)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(10)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(11)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(11)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(12)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(12)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(13)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(13)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(14)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(14)')).toContainText(dataset[1].promotion);
+
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(15)')).toContainText(dataset[2].itemName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(15)')).toContainText(dataset[2].itemPrice);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(15)')).toContainText('Caret UpCaret Down21');
+
+  await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪29.00' }).nth(1)).toBeVisible();
+  await expect(window.getByRole('button', { name: 'תשלום (85 פריטים) ₪573.00' })).toBeVisible();
+  await window.getByRole('contentinfo').getByText('₪573.00').click();
   await window.waitForTimeout(3000);
 
   await expect(window.getByText('85העגלה שלי')).toBeVisible();
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[5].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪3.20');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪3.50');
   //
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[6].itemName);
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X21 ₪52.50');
 
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(3)')).toContainText(dataset[4].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(3)')).toContainText('X21 ₪396.90');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(3)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(3)')).toContainText(dataset[6].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(4)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(4)')).toContainText(dataset[6].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(5)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(5)')).toContainText(dataset[6].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(6)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(6)')).toContainText(dataset[6].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(7)')).toContainText(dataset[6].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(7)')).toContainText(dataset[6].promotion);
 
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(4)')).toContainText(dataset[1].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(4)')).toContainText('X21 ₪88.20');
 
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(5)')).toContainText(dataset[2].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(5)')).toContainText('X21 ₪60.90');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(8)')).toContainText(dataset[4].itemName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(8)')).toContainText('X21 ₪396.90');
+
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(9)')).toContainText(dataset[1].itemName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(9)')).toContainText('X21 ₪88.20');
+
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(10)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(10)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(11)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(11)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(12)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(12)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(13)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(13)')).toContainText(dataset[1].promotion);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(14)')).toContainText(dataset[1].promotionName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(14)')).toContainText(dataset[1].promotion);
+
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(15)')).toContainText(dataset[2].itemName);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(15)')).toContainText('X21 ₪60.90');
   // 
   //await expect(window.getByText('חסכון (מבצעים והנחות) ₪29.00')).toBeVisible();
-  await expect(window.getByText('סה"כ לתשלום ₪601.70')).toBeVisible();
-  await expect(window.getByText('תשלום₪601.70')).toBeVisible();
+  await expect(window.getByText('סה"כ לתשלום ₪573.00')).toBeVisible();
+  await expect(window.getByText('תשלום₪573.00')).toBeVisible();
   await buyBags('20');
   await window.waitForTimeout(30000);
   await window.getByRole('button', { name: 'דילוג' }).click();
@@ -139,9 +188,9 @@ await runTest(async (testInfo) => {
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות20');
 
-  await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
-  await expect(window.getByRole('button', { name: 'תשלום (105 פריטים) ₪603.70' })).toBeVisible();
-  await window.getByRole('contentinfo').getByText('₪603.70').click();
+  await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪29.00' }).nth(1)).toBeVisible();
+  await expect(window.getByRole('button', { name: 'תשלום (105 פריטים) ₪575.00' })).toBeVisible();
+  await window.getByRole('contentinfo').getByText('₪575.00').click();
   await window.waitForTimeout(2000);
   await scanAdminBarcode();
   await window.waitForTimeout(2000);

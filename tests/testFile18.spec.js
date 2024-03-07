@@ -7,7 +7,7 @@ const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 
 test.beforeAll(setupElectron);
-test.afterAll(teardownElectron);
+//test.afterAll(teardownElectron);
 
 test('test 18 - Weighable Items with mismatch weight', async ({}, testInfo) => {
 await runTest(async (testInfo) => {

@@ -66,6 +66,6 @@ await runTest(async (testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(20000);
+    await window.waitForTimeout(10000);
   }, 'test 15 - Decline Age Restricted item',testInfo);
   });

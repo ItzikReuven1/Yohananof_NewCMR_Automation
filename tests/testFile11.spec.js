@@ -8,7 +8,7 @@ const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.js
 
 test.beforeAll(setupElectron);
 
-test('test 11 - Sale with a large quantity of Items', async ({}, testInfo) => {
+test('test 11 - Sale with a large quantity of Items with Promotions', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(540000);
@@ -196,5 +196,5 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await voidTrs('OK','large');
   await window.waitForTimeout(10000);
-}, 'test 11 - Sale with a large quantity of Items',testInfo);
+}, 'test 11 - Sale with a large quantity of Items with Promotions',testInfo);
 });

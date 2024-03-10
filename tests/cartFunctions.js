@@ -359,10 +359,16 @@ export const importTrs = async (store) => {
   await window.getByText('ייבוא עסקה').click();
   await expect(window.getByText('Closeייבוא עסקה')).toBeVisible();
   await expect(window.getByText('הזינו את מספר הקופה או עגלה בה נוצרה העסקה שתרצו לשחזר')).toBeVisible();
-  await window.locator("xpath=/html/body/app-root/ion-app/ion-modal[2]/app-process-modal/div/div/div/app-process-type-barcode/app-digit-keyboard/div/div/div[2]").getByText('1').click();
-  await window.getByRole('button', { name: '0' }).click();
-  await window.getByRole('button', { name: '0' }).click();
-  await window.getByRole('button', { name: '3' }).click();
-  await window.getByRole('button', { name: '8' }).click();
+  //await window.locator("xpath=/html/body/app-root/ion-app/ion-modal[2]/app-process-modal/div/div/div/app-process-type-barcode/app-digit-keyboard/div/div/div[2]").getByText('1').click();
+  for (let digit of store) {
+    if (digit === '1'){
+      await window.locator("xpath=/html/body/app-root/ion-app/ion-modal[2]/app-process-modal/div/div/div/app-process-type-barcode/app-digit-keyboard/div/div/div[2]").getByText('1').click();
+    } else {
+    await window.getByRole('button', { name: digit }).click();}
+  }
+  // await window.getByRole('button', { name: '0' }).click();
+  // await window.getByRole('button', { name: '0' }).click();
+  // await window.getByRole('button', { name: '2' }).click();
+  // await window.getByRole('button', { name: '9' }).click();
   await window.getByText('המשך').click();
 };

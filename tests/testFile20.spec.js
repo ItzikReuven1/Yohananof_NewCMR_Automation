@@ -46,6 +46,6 @@ await runTest(async (testInfo) => {
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await voidTrs('OK');
-  await window.waitForTimeout(60000);
+  await window.waitForTimeout(7000);
 }, 'test 20 - Change price to weight item',testInfo);
 });

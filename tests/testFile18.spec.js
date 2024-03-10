@@ -57,18 +57,18 @@ await runTest(async (testInfo) => {
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('0.200');
 
 
-  await window.getByRole('contentinfo').getByText('₪2.70').click();
+  await window.getByRole('contentinfo').getByText('₪2.90').click();
   await window.waitForTimeout(3000);
   await expect(window.getByText('2העגלה שלי')).toBeVisible();
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[15].itemName);
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('גזר בתפזורת0.350 ק"ג₪1.72');
 
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[14].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('בצל יבש0.200 ק"ג₪0.98');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('בצל יבש0.200 ק"ג₪1.18');
   //
    
-  await expect(window.getByText('סה"כ לתשלום ₪2.70')).toBeVisible();
-  await expect(window.getByText('תשלום₪2.70')).toBeVisible();
+  await expect(window.getByText('סה"כ לתשלום ₪2.90')).toBeVisible();
+  await expect(window.getByText('תשלום₪2.90')).toBeVisible();
   await window.getByText('להמשיך בקניות').click();
   //
   await scanAdminBarcode();

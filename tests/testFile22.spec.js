@@ -21,6 +21,7 @@ test('test 22 - Import Transaction part 2', async ({}, testInfo) => {
     await importTrs(dataset[0].cartNumber);
 
     await window.waitForTimeout(2000);
+    await scanAdminBarcode();
     await window.locator('app-manager-options').getByText('דילוג אימות מספר נייד').click();
     await window.waitForTimeout(2000);
     await restoreSuccessful();
@@ -28,24 +29,27 @@ test('test 22 - Import Transaction part 2', async ({}, testInfo) => {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[7].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[7].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down2');
-    await expect(window.getByText('קפה טורקי 2ב24- ₪5.80הנחה')).toBeVisible();
+    //await expect(window.getByText('Pricetagsקפה שלישייה 2ב22-₪5.80')).toBeVisible();
+    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[7].promotionName);
+    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[7].promotion);
+
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪5.80' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪24.00' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪24.00').click();
+    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪22.00' })).toBeVisible();
+    await window.getByRole('contentinfo').getByText('₪22.00').click();
     //////
     await window.waitForTimeout(3000);
     await expect(window.getByText('2העגלה שלי')).toBeVisible();
     
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[7].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X2 ₪29.80');
-    await expect(window.getByText('Pricetagsקפה טורקי 2ב24-₪5.80')).toBeVisible();
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X2 ₪27.80');
+    await expect(window.getByText('Pricetagsקפה שלישייה 2ב22-₪5.80')).toBeVisible();
     await expect(window.getByText('חסכון (מבצעים והנחות) -₪5.80')).toBeVisible();
-    await expect(window.getByText('סה"כ לתשלום ₪24.00')).toBeVisible();
-    await expect(window.getByText('תשלום₪24.00')).toBeVisible();
+    await expect(window.getByText('סה"כ לתשלום ₪22.00')).toBeVisible();
+    await expect(window.getByText('תשלום₪22.00')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(5000);
+    await window.waitForTimeout(60000);
   }, 'test 22 - Import Transaction part 2',testInfo);
   });

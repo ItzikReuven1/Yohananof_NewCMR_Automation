@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "Yohananof": "npx playwright test:sequence --reporter=line,allure-play"
+    "Yohananof": "npx playwright test --reporter=line,allure-playwright"
   },
   "keywords": [],
   "author": "Itzik Reuven",

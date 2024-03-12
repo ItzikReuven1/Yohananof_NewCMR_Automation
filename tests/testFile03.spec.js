@@ -18,7 +18,7 @@ test('test 03 - Light Weight Item & Change Price', async ({}, testInfo)=> {
     await startTrs();
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[5].itemBarcode);
-    await window.waitForTimeout(3000);
+    await window.waitForTimeout(10000);
     await sendSecurityScale(dataset[5].itemWeight);
     await window.waitForTimeout(2000);
     //

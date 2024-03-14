@@ -55,7 +55,7 @@ test('test 09 - InstoreBarcode items with weight Mismatch', async ({}, testInfo)
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     //
-    await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText('Pricetagsתיקון מחיר- ₪1.15');
+    await expect(window.locator('#main-basket-items-container > div > div:nth-child(5)')).toContainText('Pricetagsתיקון מחיר-₪1.15הנחה');
 
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[10].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(4)')).toContainText(dataset[10].itemPrice);
@@ -65,7 +65,7 @@ test('test 09 - InstoreBarcode items with weight Mismatch', async ({}, testInfo)
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText(dataset[11].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(3)')).toContainText('Caret UpCaret Down1');
 
-    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Pricetagsתיקון מחיר- ₪24.00');
+    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Pricetagsתיקון מחיר-₪24.00הנחה');
 
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[12].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[12].itemPrice);

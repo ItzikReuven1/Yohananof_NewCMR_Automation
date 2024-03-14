@@ -66,7 +66,7 @@ export const getHelp = async (help,cancel) => {
 };
 
 ////Start Transaction////
-export const startTrs = async (first,bagWeight) => {
+export const startTrs = async (first,bagWeight,before) => {
   const { window } = sharedContext;
   await expect(window).toHaveTitle("Cust2mate");
   // Direct Electron console to Node terminal.
@@ -85,6 +85,9 @@ export const startTrs = async (first,bagWeight) => {
   // //expect(await window.getByRole('img', { name: '#' }).screenshot()).toMatchSnapshot('Yohananof Logo.png');
   // expect(await window.getByRole('img', { name: 'captured-image' }).first().screenshot()).toMatchSnapshot('Yohananof Logo.png');
   // }
+  if (typeof bagWeight === 'number' && before === '1') {
+    await sendSecurityScale(bagWeight);
+      }
   await window.getByRole('button', { name: 'התחילו לקנות' }).click();
   await window.waitForTimeout(3000);
   //await expect(window.getByText('הזינו מספר נייד או מועדון להתחלה')).toBeVisible();
@@ -96,7 +99,7 @@ export const startTrs = async (first,bagWeight) => {
   await window.waitForTimeout(2000);
   await expect(window.getByText('היי,')).toBeVisible();
   //await expect(window.getByText('הניחו בעגלה חפצים אישיים ושקיות קנייה לפני תחילת הקניות. שימו לב, לא ניתן להושיב ילדים בעגלה!')).toBeVisible();
-  if (typeof bagWeight === 'number') {
+  if (typeof bagWeight === 'number' && before !== '1') {
   await sendSecurityScale(bagWeight);
     }
   await window.getByRole('button', { name: 'הנחתי. אפשר להתחיל' }).click();

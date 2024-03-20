@@ -24,7 +24,7 @@ export const voidTrs = async (action,qty) => {
     await window.getByRole('button', { name: 'תקלת מערכת' }).click();
     if(qty === 'large')
     {
-      await window.waitForTimeout(90000);
+      await window.waitForTimeout(100000);
     }
     await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
     await window.getByRole('button', { name: 'סגור' }).click();
@@ -374,4 +374,14 @@ export const importTrs = async (store) => {
   // await window.getByRole('button', { name: '2' }).click();
   // await window.getByRole('button', { name: '9' }).click();
   await window.getByText('המשך').click();
+};
+
+////Approve imbalance////
+export const approveImbalance = async () => {
+  const { window } = sharedContext;
+  await expect(window.getByText('Alert Circleהמוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
+  await scanAdminBarcode();
+  await window.waitForTimeout(2000);
+  await window.getByText('אישור חוסר איזון בעגלה').click();
+  await window.waitForTimeout(2000);
 };

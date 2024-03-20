@@ -50,6 +50,6 @@ test('test 22 - Import Transaction part 2', async ({}, testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(60000);
+    await window.waitForTimeout(7000);
   }, 'test 22 - Import Transaction part 2',testInfo);
   });

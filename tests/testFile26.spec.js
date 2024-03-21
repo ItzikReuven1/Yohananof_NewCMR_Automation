@@ -1,6 +1,6 @@
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
-const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage, manualBarcode, buyBags, approveImbalance} = require('./cartFunctions');
+const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage, manualBarcode, buyBags, approveImbalance, weightMismatch} = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
@@ -39,71 +39,92 @@ await runTest(async (testInfo) => {
   await scanBarcode(dataset[2].itemBarcode);
   await window.waitForTimeout(2000);
   await expect(window.getByText('שינוי כמות')).toBeVisible();
+  await sendSecurityScale(2.00);// 
   await changeQuantity('Add',20);
   await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
+  await window.waitForTimeout(2000);
+  await weightMismatch();//
   const itemWeight2 = parseFloat(dataset[2].itemWeight);
+  weightCalc = weightCalc + (itemWeight2 * 21);
+  await sendSecurityScale(weightCalc);
+  await window.waitForTimeout(2000); 
   weightCalc = weightCalc - ghostWeight
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(3000);
-  weightCalc = weightCalc + (itemWeight2 * 15);
-  await sendSecurityScale(weightCalc);
-  await approveImbalance(); 
-  await window.waitForTimeout(3000);
+  await window.waitForTimeout(2000);
   await window.locator('#main-basket-items-container > div > div:nth-child(1) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
+  await window.waitForTimeout(2000);
+  await sendSecurityScale(2.00);//
   await changeQuantity('Remove',10);
-  await window.waitForTimeout(3000);
-  weightCalc = weightCalc - ghostWeight;
-  await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(3000);
-  weightCalc = weightCalc - (itemWeight2 * 10);
-  await sendSecurityScale(weightCalc);
   await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
-  //
-  await window.waitForTimeout(3000);
+  await window.waitForTimeout(2000);
+  await weightMismatch('Remove');//
+  await window.waitForTimeout(2000);
+  weightCalc = weightCalc - ghostWeight - (itemWeight2 * 10);
+  await sendSecurityScale(weightCalc); //ghost weight
+  await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('#main-basket-items-container > div > div:nth-child(2) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
+  await window.waitForTimeout(2000);
+  await sendSecurityScale(3.00);//
   await changeQuantity('Add',20);
   await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
+  await window.waitForTimeout(2000);
+  await weightMismatch();//
+  await window.waitForTimeout(2000);
   weightCalc = weightCalc + (itemWeight1 * 20);
   await sendSecurityScale(weightCalc);
-  await window.waitForTimeout(3000);
+  await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('#main-basket-items-container > div > div:nth-child(1) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
+  await window.waitForTimeout(2000);
+  await sendSecurityScale(2.50);//
   await changeQuantity('Remove',10);
-  await window.waitForTimeout(3000);
-  weightCalc= weightCalc - (itemWeight1 * 10);
-  await sendSecurityScale(weightCalc);
   await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
+  await window.waitForTimeout(2000);
+  await weightMismatch('Remove');//
+  await window.waitForTimeout(2000);
+  weightCalc= weightCalc - (itemWeight1 * 10);
+  await sendSecurityScale(weightCalc);
   await window.waitForTimeout(3000);
   await manualBarcode(dataset[4].itemBarcode);
   await window.waitForTimeout(4000);
   weightCalc = weightCalc - ghostWeight;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('.item-type-normal').first().click();
+  await window.waitForTimeout(2000);
+  await sendSecurityScale(3.50);//
   await changeQuantity('Add',20);
   await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
+  await window.waitForTimeout(2000);
+  await weightMismatch();//
+  await window.waitForTimeout(2000);
   const itemWeight4 = parseFloat(dataset[4].itemWeight);
   weightCalc = weightCalc + (itemWeight4 * 21);
   await sendSecurityScale(weightCalc);
-  await window.waitForTimeout(3000);
+  await window.waitForTimeout(2000);
   await window.locator('.item-type-normal').first().click();
+  await window.waitForTimeout(2000);
+  await sendSecurityScale(3.90);//
   await changeQuantity('Remove',5);
-  await window.waitForTimeout(3000);
+  await window.waitForTimeout(2000);
+  await window.waitForSelector('#quantity', { state: 'hidden' });
+  await window.waitForTimeout(2000);
+  await weightMismatch('Remove');//
+  await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(3000);
   weightCalc= weightCalc - (itemWeight4 * 5);
   await sendSecurityScale(weightCalc);
   await window.waitForTimeout(10000);
-  await window.waitForSelector('#quantity', { state: 'hidden' });
-  await window.waitForTimeout(3000);
+  
   //
   await window.locator('ion-button').filter({ hasText: 'משקאות' }).locator('svg').click();
   await window.waitForTimeout(2000);

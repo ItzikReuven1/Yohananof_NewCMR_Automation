@@ -8,7 +8,7 @@ const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.js
 
 test.beforeAll(setupElectron);
 
-test('test 26 - Sales involving a large quantity of items & adding\removing Ghost Weight , including voided items & Approve Imbalance', async ({}, testInfo) => {
+test('test 26 - Add weight to the cart when item quantity dialog is open & adding\removing Ghost Weight', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(1000000);
@@ -267,5 +267,5 @@ await runTest(async (testInfo) => {
   await voidTrs('OK','large');
   await sendSecurityScale(0.0);
   await window.waitForTimeout(60000);
-}, 'test 26 - Sales involving a large quantity of items & adding\removing Ghost Weight , including voided items & Approve Imbalance',testInfo);
+}, 'test 26 - Add weight to the cart when item quantity dialog is open & adding\removing Ghost Weight',testInfo);
 });

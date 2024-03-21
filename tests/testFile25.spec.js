@@ -245,6 +245,6 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await voidTrs('OK','large');
   await sendSecurityScale(0.0);
-  await window.waitForTimeout(60000);
+  await window.waitForTimeout(10000);
 }, 'test 25 - Adding\Removing Ghost Weight , including voided items',testInfo);
 });

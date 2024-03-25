@@ -329,15 +329,25 @@ export const addWeightMessage  = async (info,help) => {
 
 
 ////Weighable Item////
-export const weightableItem  = async (itemName,itemPrice,itemWeight,status) => {
+export const weightableItem  = async (itemName,itemPrice,itemWeight,status,itemBarcode,scan,itemNetWeight,itemPackWeight) => {
   const { window } = sharedContext;
-  await window.locator('ion-button').filter({ hasText: `${itemName}`}).locator('img').click();
+  if (scan === 'scan') {
+    await scanBarcode(itemBarcode);
+  } else {
+    await window.locator('ion-button').filter({ hasText: `${itemName}`}).locator('img').click();
+  }
   await expect(window.locator("xpath=/html/body/app-root/ion-app/ion-modal/app-plu-item/div/div[1]").getByText(itemName)).toBeVisible();
   await expect(window.getByText('Alert Circleהניחו את הפריט על המשקל')).toBeVisible();
   await expect(window.locator('.message-insert-init').first()).toBeVisible();
   await expect(window.locator("xpath=/html/body/app-root/ion-app/ion-modal/app-plu-item/div/div[2]/app-plu-legal-scale/div/div[1]")).toContainText(itemPrice);
   await sendLegalScale(itemWeight);
-  await expect(window.locator('#scale-available').getByText(`${itemWeight}`)).toBeVisible();
+  if ( itemNetWeight !== null) {
+    await expect(window.locator('#scale-available').getByText(`${itemNetWeight}`)).toBeVisible(); 
+    await expect(window.locator('#scale-available').getByText('משקל אריזה:')).toBeVisible();
+    await expect(window.locator('#scale-available').getByText(`${itemPackWeight}`)).toBeVisible();
+  } else {
+    await expect(window.locator('#scale-available').getByText(`${itemWeight}`)).toBeVisible(); 
+  }
   if (status === 'cancel') {
     await window.getByRole('button', { name: 'ביטול' }).click();
   }

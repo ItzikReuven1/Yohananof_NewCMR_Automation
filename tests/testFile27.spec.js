@@ -19,16 +19,21 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await startTrs();
   await window.waitForTimeout(2000);
-  await window.locator('ion-button').filter({ hasText: 'ירקות' }).locator('svg').click();
-  
-  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,'0.200','approve','','',null,'');
+  await weightableItem(dataset[16].itemName,dataset[16].itemPrice,dataset[16].itemWeight,'approve',dataset[16].itemBarcode,'scan',dataset[16].itemNetWeight,dataset[16].itemPackWeight);
   await window.waitForTimeout(2000);
-  await sendSecurityScale(dataset[14].itemWeight);
-  await window.getByRole('button', { name: 'chevron back outline חזרה' }).click();
+  await sendSecurityScale(dataset[16].itemWeight);
+  await window.waitForTimeout(2000);
+  await weightableItem(dataset[16].itemName,dataset[16].itemPrice,dataset[16].itemWeight,'approve',dataset[16].itemBarcode,'scan',dataset[16].itemNetWeight,dataset[16].itemPackWeight);
+  await window.waitForTimeout(2000);
+  const itemWeight1 = parseFloat(dataset[16].itemWeight);
+  let weigthCalc = itemWeight1 * 2;
+  await sendSecurityScale(weigthCalc);
+  await window.waitForTimeout(2000);
   
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[14].itemName);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[14].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('0.200');
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[16].itemName);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[16].itemPrice);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[16].itemWeight);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[16].itemPackWeight);
 
   await window.getByRole('contentinfo').getByText('₪1.18').click();
   await window.waitForTimeout(3000);

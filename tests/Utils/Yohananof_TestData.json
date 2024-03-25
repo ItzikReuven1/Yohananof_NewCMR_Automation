@@ -4,7 +4,7 @@
     "cartNumber" :"10029",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1910511104248",
+    "dailyBarcode" : "1913465600248",
     "ghostWeight" : "0.020"
 },
 
@@ -153,13 +153,26 @@
     "itemPrice" : "₪5.90"
 },
 {
-    "array" : "14",
+    "array" : "15",
     "testName" : "testFile18",
     "itemInstoreBarcode":"343",
     "itemName" :"גזר בתפזורת",
     "itemWeight" :"0.350",
     "itemTag" : "",
     "itemPrice" : "₪4.90"
+},
+{
+    "array" : "16",
+    "testName" : "testFile18",
+    "itemBarcode":"400075",
+    "itemName" :"חזה עוף חצוי טרי נקי",
+    "itemWeight" :"1.000",
+    "itemNetWeight" : "0.990",
+    "itemPackWeight" : "0.010",
+    "itemTag" : "",
+    "itemPrice" : "₪44.90",
+    "promotionName" :"חזה עוף טרי 2ב85",
+    "promotion" : "4.75"
 }
 
 ]

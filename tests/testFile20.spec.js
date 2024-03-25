@@ -21,7 +21,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await window.locator('ion-button').filter({ hasText: 'ירקות' }).locator('svg').click();
   
-  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,'1.000','approve');
+  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,'1.000','approve','','',null,'');
   await window.waitForTimeout(2000);
   await sendSecurityScale(1.000);
   await window.getByRole('button', { name: 'chevron back outline חזרה' }).click();

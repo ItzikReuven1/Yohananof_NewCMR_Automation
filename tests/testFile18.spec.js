@@ -21,7 +21,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await window.locator('ion-button').filter({ hasText: 'ירקות' }).locator('svg').click();
   
-  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,dataset[14].itemWeight,'approve');
+  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,dataset[14].itemWeight,'approve','','',null,'');
   await window.waitForTimeout(2000);
   await sendSecurityScale(0.600);
   await weightMismatch();
@@ -31,7 +31,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await sendSecurityScale(dataset[14].itemWeight);
   await window.waitForTimeout(2000);
-  await weightableItem(dataset[15].itemName,dataset[15].itemPrice,dataset[15].itemWeight,'approve');
+  await weightableItem(dataset[15].itemName,dataset[15].itemPrice,dataset[15].itemWeight,'approve','','',null,'');
   await window.waitForTimeout(2000);
   let itemWeight1 = parseFloat(dataset[14].itemWeight);
   let itemWeight2 = itemWeight1 + 0.600;

@@ -7,8 +7,9 @@ const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 
 test.beforeAll(setupElectron);
+test.afterAll(teardownElectron);
 
-test('test 26 - Add weight to the cart when item quantity dialog is open & adding\removing Ghost Weight', async ({}, testInfo) => {
+test('test 26 - Add weight to the cart when item quantity dialog is open & adding removing Ghost Weight', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(1000000);
@@ -267,5 +268,5 @@ await runTest(async (testInfo) => {
   await voidTrs('OK','large');
   await sendSecurityScale(0.0);
   await window.waitForTimeout(60000);
-}, 'test 26 - Add weight to the cart when item quantity dialog is open & adding\removing Ghost Weight',testInfo);
+}, 'test 26 - Add weight to the cart when item quantity dialog is open & adding removing Ghost Weight',testInfo);
 });

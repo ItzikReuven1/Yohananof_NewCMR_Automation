@@ -4,7 +4,7 @@
     "cartNumber" :"10029",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1913465600248",
+    "dailyBarcode" : "1912954496248",
     "ghostWeight" : "0.020"
 },
 
@@ -164,15 +164,26 @@
 {
     "array" : "16",
     "testName" : "testFile18",
-    "itemBarcode":"400075",
-    "itemName" :"חזה עוף חצוי טרי נקי",
-    "itemWeight" :"1.000",
+    "itemBarcode":"2705013017542023420000",
+    "itemName" :"לברק טרי במשקל",
+    "itemWeight" :"2.342",
     "itemNetWeight" : "0.990",
     "itemPackWeight" : "0.010",
     "itemTag" : "",
-    "itemPrice" : "₪44.90",
-    "promotionName" :"חזה עוף טרי 2ב85",
-    "promotion" : "4.75"
+    "itemPrice" : "₪175.42",
+    "promotionName" :"לברק טרי 2קג ב130",
+    "promotion" : "23.19"
+},
+{
+    "array" : "17",
+    "testName" : "testFile18",
+    "itemBarcode":"728",
+    "itemName" :"תאנים",
+    "itemWeight" :"0.200",
+    "itemNetWeight" : "0.190",
+    "itemPackWeight" : "0.010",
+    "itemTag" : "",
+    "itemPrice" : "₪29.90"
 }
 
 ]

@@ -1,6 +1,6 @@
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
-const { getHelp, startTrs, voidTrs, ageRestriction, itemNotFound, changeQuantity, restoreMessage } = require('./cartFunctions');
+const { getHelp, startTrs, voidTrs, ageRestriction, itemNotFound, changeQuantity, restoreMessage, enterPhoneForReceipt } = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
@@ -46,6 +46,7 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
 
     await window.waitForTimeout(2000);
     await window.getByRole('button', { name: 'דילוג' }).click();
+    await enterPhoneForReceipt('0545656468');
     await expect(window.getByText('Pricetagsקופון משקה חלב 5ב25-₪9.52')).toBeVisible();
 
     

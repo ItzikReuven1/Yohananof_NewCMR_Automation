@@ -12,7 +12,7 @@ test.afterAll(teardownElectron);
 test('test 28 - Void incorrect item', async ({}, testInfo) => {
   await runTest(async (testInfo) => {
     const { window } = sharedContext;
-    test.setTimeout(90000);
+    test.setTimeout(180000);
     await restoreMessage("Cancel");
     await sendSecurityScale(0.0);
     // await window.waitForTimeout(20000);

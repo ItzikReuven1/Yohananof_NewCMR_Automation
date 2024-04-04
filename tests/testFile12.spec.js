@@ -1,6 +1,6 @@
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
-const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage, manualBarcode, buyBags} = require('./cartFunctions');
+const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage, manualBarcode, buyBags, enterPhoneForReceipt} = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
@@ -11,7 +11,7 @@ test.beforeAll(setupElectron);
 test('test 12 - Sales involving a large quantity of items with promotions , including voided items', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
-  test.setTimeout(600000);
+  test.setTimeout(1000000);
   //await window.waitForTimeout(10000);
   await restoreMessage("Cancel");
   await sendSecurityScale(0.0);
@@ -183,6 +183,7 @@ await runTest(async (testInfo) => {
   await buyBags('20');
   await window.waitForTimeout(30000);
   await window.getByRole('button', { name: 'דילוג' }).click();
+  await enterPhoneForReceipt('0545656468');
   await window.waitForTimeout(8000);
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
   await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();

@@ -24,7 +24,7 @@ export const voidTrs = async (action,qty) => {
     await window.getByRole('button', { name: 'תקלת מערכת' }).click();
     if(qty === 'large')
     {
-      await window.waitForTimeout(100000);
+      await window.waitForTimeout(120000);
     }
     await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
     await window.getByRole('button', { name: 'סגור' }).click();
@@ -363,7 +363,7 @@ export const personalBagMessage  = async (cont) => {
   const { window } = sharedContext;
   await expect(window.getByRole('img', { name: 'Help Circle', exact: true })).toBeVisible();
   await expect(window.getByText('האם הסרתם חפצים אישיים?')).toBeVisible();
-  await expect(window.getByText('יש להחזיר את החפצים האישיים לעגלה, או ללחוץ להמשיך בלעדיהם')).toBeVisible();
+  await expect(window.getByText('אתם יכולים להחזיר את החפצים האישיים לעגלה, או ללחוץ כדי להמשיך בלעדיהם')).toBeVisible();
   await expect(window.getByRole('button', { name: 'להמשיך בלעדיהם' })).toBeVisible();
   if (cont === 'Ok') {
     await window.getByRole('button', { name: 'להמשיך בלעדיהם' }).click();
@@ -399,4 +399,14 @@ export const approveImbalance = async () => {
   await window.waitForTimeout(2000);
   await window.getByText('אישור חוסר איזון בעגלה').click();
   await window.waitForTimeout(2000);
+};
+
+////Enter Phone Number For Receipt////
+export const enterPhoneForReceipt = async (phone) => {
+  const { window } = sharedContext;
+  await expect(window.getByText('לקבלת החשבוניתאשרו או הזינו מספר נייד אחר')).toBeVisible();
+  for (let digit of phone) {
+    await window.getByRole('button', { name: digit }).click();
+  }
+  await window.locator('.phone-number-keyboard > .main > .keyboard-header > .number-bottom > ion-button:nth-child(3) > .button-native').click();
 };

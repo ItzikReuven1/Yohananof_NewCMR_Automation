@@ -7,7 +7,7 @@ const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 
 test.beforeAll(setupElectron);
-test.afterAll(teardownElectron);
+//test.afterAll(teardownElectron);
 
 test('test 28 - Void incorrect item', async ({}, testInfo) => {
   await runTest(async (testInfo) => {
@@ -73,6 +73,6 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(60000);
+    await window.waitForTimeout(7000);
   }, 'test 28 - Void incorrect item',testInfo);
   });

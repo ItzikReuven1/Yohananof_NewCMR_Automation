@@ -1,6 +1,6 @@
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
-const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage, manualBarcode, buyBags, enterPhoneForReceipt} = require('./cartFunctions');
+const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage, manualBarcode, buyBags, enterPhoneForReceipt, approveImbalance, addWeightMessage} = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
@@ -223,19 +223,22 @@ await runTest(async (testInfo) => {
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await buyBags('20');
+  await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(2000)
+  await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(30000);
+  // await addWeightMessage();
+  // await approveImbalance('placeWeight');
   await window.getByRole('button', { name: 'דילוג' }).click();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await enterPhoneForReceipt('0545656468');
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(2000);
+  await window.waitForTimeout(3000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(8000);
@@ -249,7 +252,8 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
   await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
-  await window.waitForTimeout(2000);
+  await addWeightMessage();
+  await approveImbalance('placeWeight');
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות20');
@@ -263,10 +267,11 @@ await runTest(async (testInfo) => {
   await buyBags('5');
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(2000)
+  await window.waitForTimeout(3000)
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(10000);
+  //await approveImbalance();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
@@ -279,8 +284,8 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
   await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
-  await window.waitForTimeout(2000);
-
+  await addWeightMessage();
+  await approveImbalance('placeWeight');
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await voidTrs('OK','large');

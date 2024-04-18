@@ -392,9 +392,14 @@ export const importTrs = async (store) => {
 };
 
 ////Approve imbalance////
-export const approveImbalance = async () => {
+export const approveImbalance = async (placeWeight) => {
   const { window } = sharedContext;
-  await expect(window.getByText('Alert Circleהמוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
+  if (placeWeight==='placeWeight') {
+    //
+  } else {
+    await expect(window.getByText('Alert Circleהמוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
+  }
+  //await expect(window.getByText('Alert Circleהמוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await window.getByText('אישור חוסר איזון בעגלה').click();

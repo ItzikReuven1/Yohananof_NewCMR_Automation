@@ -2,6 +2,7 @@ const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
 const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage } = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
+const getCartDate = require('./getCartDate');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
@@ -13,10 +14,36 @@ await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(180000);
   //await window.waitForTimeout(10000);
+  const cartData = await getCartDate('10038');
+
+   // Check if cartData is null and fail the test if it is
+   if (cartData === null) {
+    throw new Error('Cart data is null');
+}
+
+// Log the returned cartData
+console.log('Cart Data:', cartData);
+
   await restoreMessage("Cancel");
   await sendSecurityScale(0.0);
   await window.waitForTimeout(2000);
   await startTrs(1,'undefined');
+  ////
+  window.on('console', async (message) => {
+    const logText = message.text();
+    if (logText.includes('cartUpdate event from CMR')) {
+        // Extract the TransactionId from the log message
+        const match = logText.match(/"TransactionId":"([^"]+)"/);
+        const transactionId = match ? match[1] : null;
+
+        console.log('TransactionId:', transactionId);
+
+        // You can use the transactionId in your test logic here
+        // For example, assert that the TransactionId is not null
+        expect(transactionId).not.toBeNull();
+    }
+});
+  ////
   await getHelp();
   await window.waitForTimeout(3000);
   await getHelp('',"cancel");

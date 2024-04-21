@@ -5,6 +5,8 @@ const { setupElectron, teardownElectron, sharedContext } = require('./electronSe
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
+const { getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 
@@ -14,8 +16,13 @@ await runTest(async (testInfo) => {
     test.setTimeout(120000);
     await restoreMessage("Cancel");
     await sendSecurityScale(0.0);
-    //await window.waitForTimeout(2000);
     await startTrs();
+    await window.waitForTimeout(2000);
+    //
+    const journeyId = await sendEventtoCMR();
+    await addJourneyId(journeyId);
+    console.log("Journey ID:", journeyId);
+    //
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[3].itemBarcode);
     await window.waitForTimeout(2000);
@@ -28,11 +35,6 @@ await runTest(async (testInfo) => {
     const itemWeight2 = parseFloat(dataset[4].itemWeight);
     const weighCalc=itemWeight2 + itemWeight1;
     await sendSecurityScale(weighCalc);
-    ///Price Calculation
-    // const itemPrice1 = parseFloat(dataset[3].itemPrice);
-    // const itemPrice2 = parseFloat(dataset[4].itemPrice);
-    // const priceCalc=itemPrice2 + itemPrice1;
-    // await sendSecurityScale(3.24);
     await window.waitForTimeout(2000);
 
     //await expect(window.getByText('שוקולד חלב חמישיהסה"כ₪18.90מחיר ליח\' :₪18.90כמות1')).toBeVisible();
@@ -65,6 +67,8 @@ await runTest(async (testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(5000);
+    await window.waitForTimeout(60000);
+    await getOrders(journeyId);
+    
   }, 'test 02 - Age Restricted item & Manual Barcode',testInfo);
   });

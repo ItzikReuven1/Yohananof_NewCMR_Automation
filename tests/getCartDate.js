@@ -1,7 +1,6 @@
 // getCartDate.spec.js
 
 // Import necessary modules
-//const { test, expect } = require('@playwright/test');
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
 const mongoose = require('mongoose');

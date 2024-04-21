@@ -4,7 +4,9 @@ const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage } = require('
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const getCartDate = require('./getCartDate');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
 const { runTest } = require('./testWrapper');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 
 test.beforeAll(setupElectron);
@@ -13,37 +15,17 @@ test('test 01 - Regular Item & Is Quantity Item', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(180000);
-  //await window.waitForTimeout(10000);
-  const cartData = await getCartDate('10038');
-
-   // Check if cartData is null and fail the test if it is
-   if (cartData === null) {
-    throw new Error('Cart data is null');
-}
-
-// Log the returned cartData
-console.log('Cart Data:', cartData);
-
+  await deleteJourneyIdsFile();
+  await deleteOrderReportFile();
   await restoreMessage("Cancel");
   await sendSecurityScale(0.0);
   await window.waitForTimeout(2000);
   await startTrs(1,'undefined');
-  ////
-  window.on('console', async (message) => {
-    const logText = message.text();
-    if (logText.includes('cartUpdate event from CMR')) {
-        // Extract the TransactionId from the log message
-        const match = logText.match(/"TransactionId":"([^"]+)"/);
-        const transactionId = match ? match[1] : null;
-
-        console.log('TransactionId:', transactionId);
-
-        // You can use the transactionId in your test logic here
-        // For example, assert that the TransactionId is not null
-        expect(transactionId).not.toBeNull();
-    }
-});
-  ////
+  //
+  const journeyId = await sendEventtoCMR();
+  await addJourneyId(journeyId);
+  console.log("Journey ID:", journeyId);
+  //
   await getHelp();
   await window.waitForTimeout(3000);
   await getHelp('',"cancel");
@@ -92,6 +74,7 @@ console.log('Cart Data:', cartData);
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await voidTrs('OK');
-  await window.waitForTimeout(7000);
+  await window.waitForTimeout(40000);
+  await getOrders(journeyId);
 }, 'test 01 - Regular Item & Is Quantity Item',testInfo);
 });

@@ -5,6 +5,8 @@ const { setupElectron, teardownElectron, sharedContext } = require('./electronSe
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 
@@ -40,6 +42,7 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
     await expect(window.getByRole('button', { name: 'תשלום (6 פריטים) ₪34.51' })).toBeVisible();
     await window.getByRole('contentinfo').getByText('₪34.51').click();
+    
 
     
     await window.getByText('המשך').click();
@@ -74,6 +77,11 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await expect(window.getByText('חסכון (מבצעים והנחות) -₪9.52')).toBeVisible();
     await expect(window.getByText('סה"כ לתשלום ₪24.99')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
+    // Get journeyId
+    const journeyId = await sendEventtoCMR();
+    await addJourneyId(journeyId);
+    console.log("Journey ID:", journeyId);
+    //
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');

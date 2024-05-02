@@ -5,6 +5,8 @@ const { setupElectron, teardownElectron, sharedContext } = require('./electronSe
 const { scanBarcode, scanAdminBarcode, sendSecurityScale, sendLegalScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 //test.afterAll(teardownElectron);
@@ -65,11 +67,14 @@ await runTest(async (testInfo) => {
 
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[14].itemName);
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('בצל יבש0.200 ק"ג₪1.18');
-  //
-   
+  
   await expect(window.getByText('סה"כ לתשלום ₪2.90')).toBeVisible();
   await expect(window.getByText('תשלום₪2.90')).toBeVisible();
   await window.getByText('להמשיך בקניות').click();
+  // Get journeyId
+  const journeyId = await sendEventtoCMR();
+  await addJourneyId(journeyId);
+  console.log("Journey ID:", journeyId);
   //
   await scanAdminBarcode();
   await window.waitForTimeout(2000);

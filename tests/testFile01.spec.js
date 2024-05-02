@@ -2,12 +2,11 @@ const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
 const { getHelp, startTrs, voidTrs, changeQuantity, restoreMessage } = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
-const getCartDate = require('./getCartDate');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
-const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
 const { runTest } = require('./testWrapper');
-const { deleteOrderReportFile, getOrders } = require('./getOrders');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 
@@ -21,11 +20,6 @@ await runTest(async (testInfo) => {
   await sendSecurityScale(0.0);
   await window.waitForTimeout(2000);
   await startTrs(1,'undefined');
-  //
-  const journeyId = await sendEventtoCMR();
-  await addJourneyId(journeyId);
-  console.log("Journey ID:", journeyId);
-  //
   await getHelp();
   await window.waitForTimeout(3000);
   await getHelp('',"cancel");
@@ -70,11 +64,14 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('סה"כ לתשלום ₪15.80')).toBeVisible();
   await expect(window.getByText('תשלום₪15.80')).toBeVisible();
   await window.getByText('להמשיך בקניות').click();
+  // Get journeyId
+  const journeyId = await sendEventtoCMR();
+  await addJourneyId(journeyId);
+  console.log("Journey ID:", journeyId);
   //
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await voidTrs('OK');
-  await window.waitForTimeout(40000);
-  await getOrders(journeyId);
+  await window.waitForTimeout(5000);
 }, 'test 01 - Regular Item & Is Quantity Item',testInfo);
 });

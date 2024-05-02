@@ -6,23 +6,18 @@ const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerA
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
-const { getOrders } = require('./getOrders');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 
 test('test 02 - Age Restricted item & Manual Barcode', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
     const { window } = sharedContext;
-    test.setTimeout(120000);
+    test.setTimeout(180000);
     await restoreMessage("Cancel");
     await sendSecurityScale(0.0);
     await startTrs();
     await window.waitForTimeout(2000);
-    //
-    const journeyId = await sendEventtoCMR();
-    await addJourneyId(journeyId);
-    console.log("Journey ID:", journeyId);
-    //
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[3].itemBarcode);
     await window.waitForTimeout(2000);
@@ -64,11 +59,16 @@ await runTest(async (testInfo) => {
     await expect(window.getByText('סה"כ לתשלום ₪48.80')).toBeVisible();
     await expect(window.getByText('תשלום₪48.80')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
+    // Get journeyId
+    const journeyId = await sendEventtoCMR();
+    await addJourneyId(journeyId);
+    console.log("Journey ID:", journeyId);
+    //
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(60000);
-    await getOrders(journeyId);
-    
+    await window.waitForTimeout(5000);
   }, 'test 02 - Age Restricted item & Manual Barcode',testInfo);
   });
+
+  

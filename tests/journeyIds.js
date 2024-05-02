@@ -2,7 +2,7 @@ const { request } = require('@playwright/test');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
 import fs from 'fs';
 
-let journeyIds = [];
+//let journeyIds = [];
 
 ////Send event to CMR////
  export const sendEventtoCMR= async () => {
@@ -25,17 +25,17 @@ let journeyIds = [];
 //export const approveImbalance = async (placeWeight) => {
 
 export const addJourneyId = async(journeyId) => {
-  journeyIds.push(journeyId);
-  saveJourneyIdsToFile();
+  //journeyIds.push(journeyId);
+  saveJourneyIdsToFile(journeyId);
 };
 
-export const getJourneyIds = async() => {
-  return journeyIds;
-};
+// export const getJourneyIds = async() => {
+//   return journeyIds;
+// };
 
-const saveJourneyIdsToFile = async () => {
+const saveJourneyIdsToFile = async (journeyId) => {
   try {
-    const data = JSON.stringify(journeyIds);
+    const data = JSON.stringify(journeyId);
     await fs.appendFileSync('journeyIds.json', data + '\n');
   } catch (err) {
     console.error('Error saving journeyIds to file:', err);

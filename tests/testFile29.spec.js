@@ -5,9 +5,11 @@ const { setupElectron, teardownElectron, sharedContext } = require('./electronSe
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
-test.afterAll(teardownElectron);
+//test.afterAll(teardownElectron);
 
 test('test 29 - Adding Ghost Weight in CheckOut Screens', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
@@ -286,10 +288,15 @@ await runTest(async (testInfo) => {
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
   await addWeightMessage();
   await approveImbalance('placeWeight');
+  // Get journeyId
+  const journeyId = await sendEventtoCMR();
+  await addJourneyId(journeyId);
+  console.log("Journey ID:", journeyId);
+  //
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await voidTrs('OK','large');
   await sendSecurityScale(0.0);
-  await window.waitForTimeout(60000);
+  await window.waitForTimeout(50000);
 }, 'test 29 - Adding Ghost Weight in CheckOut Screens',testInfo);
 });

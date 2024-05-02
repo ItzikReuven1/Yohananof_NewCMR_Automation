@@ -1,20 +1,22 @@
 // Import necessary modules
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
+const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const mongoose = require('mongoose');
-const fs = require('fs');
+import fs from 'fs';
 
 // Define the MongoDB connection URI
 const mongoURI = 'mongodb+srv://Itzik:Itzik12345!@test-stg.w3ecl.mongodb.net/data-center-client-stg';
 
 // Export the function for use in other files
-module.exports.getOrders = async function(journeyId){
+export const getOrders = async (journeyIds) => {
+    const { window } = sharedContext;
     try {
         // Connect to MongoDB
         await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-        // Define the schema for the "orders" collection
-        const orderSchema = new mongoose.Schema({
+         // Define the schema for the "orders" collection
+         const orderSchema = new mongoose.Schema({
             products: [{
                 name: String,
                 unitPrice: Number,
@@ -31,8 +33,15 @@ module.exports.getOrders = async function(journeyId){
         // Create the model for the "orders" collection
         const Order = mongoose.model('Order', orderSchema);
 
-        // Find the document with the provided journeyId
-        const order = await Order.findOne({ journeyId });
+
+        for (const journeyId of journeyIds) {
+            const trimmedJourneyId = journeyId.trim().replaceAll('"', ''); // Trim to remove any whitespace
+            console.log('Processing journey ID:', trimmedJourneyId);
+
+            // Find the document with the current journeyId
+        const order = await Order.findOne({ journeyId: trimmedJourneyId });
+        console.log('MongoDB query:', { journeyId: trimmedJourneyId });
+        console.log('Order found:', order);
 
         if (order) {
             console.log('Order found:', order);
@@ -54,26 +63,24 @@ module.exports.getOrders = async function(journeyId){
             // console.log('Report generated: order_report.json');
 
             // Append report data to JSON file
-            fs.appendFileSync('order_report.json', JSON.stringify(reportData, null, 2) + '\n');
-            console.log('Report appended to order_report.json');
-
-            // Return the order data
-            return reportData;
+            await fs.appendFileSync('order_report.json', JSON.stringify(reportData, null, 2) + '\n');
+            console.log('Report appended to order_report.json for journeyId:', journeyId.trim());
         } else {
-            console.log('Order not found');
-            return null;
+            console.log('Order not found for journeyId:', journeyId.trim());
         }
-    } catch (error) {
-        console.error('Error:', error);
-        return null;
-    } finally {
+    } }catch (error) {
+        console.error('Error finding order:', error);
+    }
+    finally {
         // Close the MongoDB connection
-        mongoose.disconnect();
+        await mongoose.disconnect();
+        console.log('MongoDB connection closed');
     }
 };
 
 // Function to delete the 'order_report.json' file
-module.exports.deleteOrderReportFile = function() {
+
+export const deleteOrderReportFile = async() => {
     try {
         fs.unlinkSync('order_report.json');
         console.log('Order report file deleted successfully');

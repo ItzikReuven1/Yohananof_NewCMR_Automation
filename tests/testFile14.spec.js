@@ -5,6 +5,8 @@ const { setupElectron, teardownElectron, sharedContext } = require('./electronSe
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
 const dataset = JSON.parse(JSON.stringify(require("./Utils/Yohananof_TestData.json")));
+const { sendEventtoCMR, addJourneyId, deleteJourneyIdsFile } = require('./journeyIds');
+const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 //test.afterAll(teardownElectron);
@@ -69,6 +71,11 @@ await runTest(async (testInfo) => {
     await expect(window.getByText('סה"כ לתשלום ₪48.80')).toBeVisible();
     await expect(window.getByText('תשלום₪48.80')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
+    // Get journeyId
+    const journeyId = await sendEventtoCMR();
+    await addJourneyId(journeyId);
+    console.log("Journey ID:", journeyId);
+    //
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');

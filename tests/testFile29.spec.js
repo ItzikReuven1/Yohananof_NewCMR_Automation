@@ -80,7 +80,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(3000);
   weightCalc= weightCalc - (itemWeight1 * 10);
   await sendSecurityScale(weightCalc);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   await window.waitForTimeout(3000);
   await manualBarcode(dataset[4].itemBarcode);
@@ -89,7 +89,7 @@ await runTest(async (testInfo) => {
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('.item-type-normal').first().click();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const itemWeight4 = parseFloat(dataset[4].itemWeight);
   weightCalc = weightCalc + (itemWeight4 * 21);

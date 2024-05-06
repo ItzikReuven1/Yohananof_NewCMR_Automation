@@ -4,7 +4,7 @@
     "cartNumber" :"10029",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1912462080248",
+    "dailyBarcode" : "1917386240248",
     "ghostWeight" : "0.020",
     "ghostWeight1" : "0.060"
 },
@@ -165,14 +165,14 @@
 {
     "array" : "16",
     "testName" : "testFile18",
-    "itemBarcode":"2705013017542023420000",
+    "itemInstoreBarcode":"2705013017542023420000",
     "itemName" :"לברק טרי במשקל",
     "itemWeight" :"2.342",
     "itemNetWeight" : "0.990",
     "itemPackWeight" : "0.010",
     "itemTag" : "",
     "itemPrice" : "₪175.42",
-    "promotionName" :"לברק טרי 2קג ב130",
+    "promotionName" : "לברק טרי 2קג ב130",
     "promotion" : "23.19"
 },
 {
@@ -185,6 +185,17 @@
     "itemPackWeight" : "0.010",
     "itemTag" : "",
     "itemPrice" : "₪29.90"
+},
+{
+    "array" : "18",
+    "testName" : "testFile18",
+    "itemInstoreBarcode":"2705019012530000070000",
+    "itemName" :"פילה דניס טרי יחידה",
+    "itemWeight" :"1.300",
+    "itemTag" : "",
+    "itemPrice" : "₪125.30",
+    "promotionName" : "פילה דניס יח 7ב-100",
+    "promotion" : "-₪25.30"
 }
 
 ]

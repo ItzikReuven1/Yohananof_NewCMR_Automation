@@ -80,6 +80,6 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(7000);
+    await window.waitForTimeout(10000);
   }, 'test 28 - Void incorrect item',testInfo);
   });

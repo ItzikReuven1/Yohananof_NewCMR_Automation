@@ -10,7 +10,7 @@ export const setupElectron = async () => {
   if (!sharedContext.electronApp) {
     
     //Run the batch file using the child_process.exec function
-    exec('C:\\Cust2Mate\\Support\\C2M_Reload.bat', (error, stdout, stderr) => {
+    exec('cmd.exe /c C:\\Cust2Mate\\Support\\C2M_Reload.bat', (error, stdout, stderr) => {
       if (error) {
         console.error(`Error running batch file: ${error}`);
         return;

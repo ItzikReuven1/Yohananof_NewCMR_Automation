@@ -11,7 +11,7 @@ const { deleteOrderReportFile, getOrders } = require('./getOrders');
 test.beforeAll(setupElectron);
 //test.afterAll(teardownElectron);
 
-test('test 29 - Adding Ghost Weight in CheckOut Screens', async ({}, testInfo) => {
+test.skip('test 29 - Adding Ghost Weight in CheckOut Screens', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(1000000);

@@ -2,17 +2,15 @@ import { Battery_Status, LegalScale_Status, SecurityScale_Status } from './scann
 
 const { _electron: electron } = require('@playwright/test');
 const { exec } = require('child_process');
-const os = require('os');
 
 
-const command = os.platform() === 'win32' ? 'cmd.exe /c C:\\Cust2Mate\\Support\\C2M_Reload.bat' : 'sh -c C:/Cust2Mate/Support/C2M_Reload.bat';
 let sharedContext = {};
 
 export const setupElectron = async () => {
   if (!sharedContext.electronApp) {
     
     //Run the batch file using the child_process.exec function
-    exec(command, (error, stdout, stderr) => {
+    exec('C:\\Cust2Mate\\Support\\C2M_Reload.bat', (error, stdout, stderr) => {
       if (error) {
         console.error(`Error running batch file: ${error}`);
         return;
@@ -23,7 +21,7 @@ export const setupElectron = async () => {
     //Wait for the batch file to finish executing (if necessary)
     await new Promise((resolve) => {
     // Replace '4000' with an appropriate value to wait for the batch file to finish executing
-      setTimeout(resolve, 10000);
+      setTimeout(resolve, 40000);
     });
  
     // Launch Electron

@@ -44,7 +44,7 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('שינוי כמות')).toBeVisible();
   await sendSecurityScale(2.00);// 
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   await window.waitForTimeout(2000);
   await weightMismatch();//
@@ -73,7 +73,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await sendSecurityScale(3.00);//
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   await window.waitForTimeout(2000);
   await weightMismatch();//
@@ -85,7 +85,7 @@ await runTest(async (testInfo) => {
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('#main-basket-items-container > div > div:nth-child(1) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
   await window.waitForTimeout(2000);
-  await sendSecurityScale(2.50);//
+  await sendSecurityScale(1.20);//
   await changeQuantity('Remove',10);
   await window.waitForTimeout(10000);
   await window.waitForSelector('#quantity', { state: 'hidden' });

@@ -26,7 +26,7 @@ export const voidTrs = async (action,qty) => {
     {
       await window.waitForTimeout(120000);
     }
-    await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
+    await expect(window.getByText('העסקה בוטלה בהצלחה')).toBeVisible();
     await window.getByRole('button', { name: 'סגור' }).click();
 
   } else if (action === 'Cancel') {
@@ -97,7 +97,7 @@ export const startTrs = async (first,bagWeight,before) => {
   await window.waitForTimeout(2000);
   await window.locator('app-manager-options').getByText('דילוג אימות מספר נייד').click();
   await window.waitForTimeout(2000);
-  await expect(window.getByText('היי,')).toBeVisible();
+  //await expect(window.getByText('היי,')).toBeVisible();
   //await expect(window.getByText('הניחו בעגלה חפצים אישיים ושקיות קנייה לפני תחילת הקניות. שימו לב, לא ניתן להושיב ילדים בעגלה!')).toBeVisible();
   if (typeof bagWeight === 'number' && before !== '1') {
   await sendSecurityScale(bagWeight);

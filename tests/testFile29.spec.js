@@ -234,7 +234,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(30000);
   // await addWeightMessage();
   // await approveImbalance('placeWeight');
-  await window.getByRole('button', { name: 'דילוג' }).click();
+  await window.getByText('דילוג').click();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await enterPhoneForReceipt('0545656468');

@@ -48,7 +48,8 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await window.getByText('המשך').click();
 
     await window.waitForTimeout(2000);
-    await window.getByRole('button', { name: 'דילוג' }).click();
+    //await window.getByRole('button', { name: 'דילוג' }).click();
+    await window.getByText('דילוג').click();
     await enterPhoneForReceipt('0545656468');
     await expect(window.getByText('Pricetagsקופון משקה חלב 5ב25-₪9.52')).toBeVisible();
 

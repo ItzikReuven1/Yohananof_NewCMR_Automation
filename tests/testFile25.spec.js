@@ -42,7 +42,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await expect(window.getByText('שינוי כמות')).toBeVisible();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   //const itemWeight1 = parseFloat(dataset[1].itemWeight);
   const itemWeight2 = parseFloat(dataset[2].itemWeight);
@@ -68,7 +68,7 @@ await runTest(async (testInfo) => {
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('#main-basket-items-container > div > div:nth-child(2) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   weightCalc = weightCalc + (itemWeight1 * 20);
   await sendSecurityScale(weightCalc);
@@ -89,7 +89,7 @@ await runTest(async (testInfo) => {
   await sendSecurityScale(weightCalc); //ghost weight
   await window.locator('.item-type-normal').first().click();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const itemWeight4 = parseFloat(dataset[4].itemWeight);
   weightCalc = weightCalc + (itemWeight4 * 21);
@@ -224,7 +224,7 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('תשלום₪399.90')).toBeVisible();
   await buyBags('20');
   await window.waitForTimeout(30000);
-  await window.getByRole('button', { name: 'דילוג' }).click();
+  await window.getByText('דילוג').click();
   await enterPhoneForReceipt('0545656468');
   await window.waitForTimeout(8000);
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();

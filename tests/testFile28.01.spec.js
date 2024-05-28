@@ -22,10 +22,10 @@ test('test 28.01 - InstoreBarcode by Weight with Promotion and weight Mismatch',
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[16].itemInstoreBarcode);
     await window.waitForTimeout(2000);
-    await sendSecurityScale(2.0);
+    await sendSecurityScale(0.8);
     await weightMismatch();
     await window.waitForTimeout(2000);
-    await sendSecurityScale(0.5);
+    await sendSecurityScale(3.0);
     await weightMismatch();
     await window.waitForTimeout(2000);
     await sendSecurityScale(dataset[16].itemWeight)
@@ -38,22 +38,22 @@ test('test 28.01 - InstoreBarcode by Weight with Promotion and weight Mismatch',
     await weightMismatch();
     //weight Calcultion
     const itemWeight1 = parseFloat(dataset[16].itemWeight);
-    const itemWeight2 = parseFloat(dataset[16].itemWeight);
+    const itemWeight2 = parseFloat(dataset[16].itemWeightMax);
     let weighCalc=itemWeight2 + itemWeight1;
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[16].itemInstoreBarcode);
     await window.waitForTimeout(2000);
-    const itemWeight3 = parseFloat(dataset[16].itemWeight);
+    const itemWeight3 = parseFloat(dataset[16].itemWeightMin);
     weighCalc=weighCalc + 0.400;
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     await weightMismatch();
-    weighCalc=weighCalc - 0.300;
+    weighCalc=weighCalc - 0.400;
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     await weightMismatch();
-    weighCalc=weighCalc - 0.100 + itemWeight3;
+    weighCalc=weighCalc + itemWeight3;
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     //

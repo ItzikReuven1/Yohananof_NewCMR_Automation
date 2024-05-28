@@ -222,7 +222,7 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('תשלום₪399.90')).toBeVisible();
   await buyBags('20');
   await window.waitForTimeout(30000);
-  await window.getByRole('button', { name: 'דילוג' }).click();
+  await window.getByText('דילוג').click();
   await enterPhoneForReceipt('0545656468');
   await window.waitForTimeout(8000);
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();

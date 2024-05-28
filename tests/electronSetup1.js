@@ -21,7 +21,7 @@ export const setupElectron = async () => {
     //Wait for the batch file to finish executing (if necessary)
     await new Promise((resolve) => {
     // Replace '4000' with an appropriate value to wait for the batch file to finish executing
-      setTimeout(resolve, 40000);
+      setTimeout(resolve, 45000);
     });
  
     // Launch Electron

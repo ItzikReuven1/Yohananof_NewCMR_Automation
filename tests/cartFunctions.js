@@ -26,7 +26,7 @@ export const voidTrs = async (action,qty) => {
     {
       await window.waitForTimeout(120000);
     }
-    await expect(window.getByText('העסקה בוטלה בהצלחה')).toBeVisible();
+    await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
     await window.getByRole('button', { name: 'סגור' }).click();
 
   } else if (action === 'Cancel') {

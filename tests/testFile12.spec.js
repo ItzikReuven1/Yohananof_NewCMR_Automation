@@ -29,7 +29,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await expect(window.getByText('שינוי כמות')).toBeVisible();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const itemWeight1 = parseFloat(dataset[1].itemWeight);
   const itemWeight2 = parseFloat(dataset[2].itemWeight);
@@ -48,7 +48,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(3000);
   await window.locator('#main-basket-items-container > div > div:nth-child(2) > app-basket-item > div > div > div.quantity-of-products.buffer-strip > app-quantity-of-products > div > span').click();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const weightCalc2 = weightCalc1 + (itemWeight1 * 20);
   await sendSecurityScale(weightCalc2);
@@ -68,7 +68,7 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(4000);
   await window.locator('.item-type-normal').first().click();
   await changeQuantity('Add',20);
-  await window.waitForTimeout(10000);
+  await window.waitForTimeout(15000);
   await window.waitForSelector('#quantity', { state: 'hidden' });
   const itemWeight4 = parseFloat(dataset[4].itemWeight);
   const weightCalc4 = weightCalc3 + (itemWeight4 * 21);

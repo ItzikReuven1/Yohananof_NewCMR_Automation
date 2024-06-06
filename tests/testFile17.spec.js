@@ -43,7 +43,7 @@ await runTest(async (testInfo) => {
     await scanBarcode(dataset[3].itemBarcode);
     await window.waitForTimeout(2000);
     const itemWeight1 = parseFloat(dataset[3].itemWeight);
-    let weigthCalc = 0.250 + itemWeight1;
+    let weigthCalc = 0.150 + itemWeight1;
     await sendSecurityScale(weigthCalc);
     await window.waitForTimeout(2000);
     await manualBarcode(dataset[4].itemBarcode);

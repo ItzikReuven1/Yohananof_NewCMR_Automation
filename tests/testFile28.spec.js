@@ -43,7 +43,7 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await weightChange('Yes');
     await window.locator('app-basket-item').filter({ hasText: 'יטבתה פרו וניל 350סה"כ₪6.90' }).getByRole('button').click();
     await expect(window.getByText('הפריט שנסרק או נבחר אינו תואם את הפריט שהוצא מהעגלה. הפעולה בוטלה')).toBeVisible();
-    await window.getByRole('button', { name: 'trash outline' }).click();
+    await window.locator('app-basket-item').filter({ hasText: 'מארז קפה טורקי יוחננוף 3*85' }).getByRole('button').click();
     //await window.locator('//*[@id="main-basket-items-container"]/div/div[1]/app-basket-item/div/div/div[6]/ion-button//button').click();
     //await window.click('//*[@id="main-basket-items-container"]/div/div[1]/app-basket-item/div/div/div[6]/ion-button//button');
     await changeQuantity('Remove',1);

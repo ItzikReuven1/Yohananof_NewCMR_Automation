@@ -26,7 +26,8 @@ export const voidTrs = async (action,qty) => {
     {
       await window.waitForTimeout(120000);
     }
-    await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
+    //await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
+    await expect(window.getByText('העסקה בוטלה בהצלחה')).toBeVisible();
     await window.getByRole('button', { name: 'סגור' }).click();
 
   } else if (action === 'Cancel') {
@@ -120,7 +121,8 @@ export const ageRestriction = async () => {
   await expect(window.getByText('חלק מהפריטים ממתינים לאישור')).toBeVisible();
   await expect(window.getByText('פנו בבקשה לצוות התמיכה להשלמת התהליך')).toBeVisible();
   await window.getByRole('button', { name: 'הבנתי, תודה' }).click();
-  await expect(window.getByText('צוות התמיכה יוודא את גילך לפני המעבר לתשלום. בינתיים ניתן להמשיך בקנייה.')).toBeVisible();
+  //await expect(window.getByText('צוות התמיכה יוודא את גילך לפני המעבר לתשלום. בינתיים ניתן להמשיך בקנייה.')).toBeVisible();
+  await expect(window.getByText('צוות התמיכה יוודא את גילך לפני המעבר לתשלום. בינתיים ניתן להמשיך בקניה')).toBeVisible();
   await window.waitForTimeout(2000);
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
@@ -215,7 +217,13 @@ export const changePrice = async (barcode, productText, newPrice,weightableItem)
   const { window } = sharedContext;
   await window.getByText('שינוי מחיר').click();
   await expect(window.getByText('שינוי מחיר1חיפוש פריט2בחירת פריט3שינוי מחיר4סיום')).toBeVisible();
-  await expect(window.getByText('בחירת פריטסריקת ברקודהקלדת ברקוד בחרו מסל הקנייה')).toBeVisible();
+  //await expect(window.getByText('בחירת פריטסריקת ברקודהקלדת ברקוד בחרו מסל הקנייה')).toBeVisible();
+  //await expect(window.getByText('בחירת פריטסריקת ברקודהקלדת ברקוד בחרו מסל הקנייה')).toBeVisible();
+  await expect(window.locator('div').filter({ hasText: /^בחירת פריט$/ })).toBeVisible();
+  await expect(window.getByText('סריקת ברקוד')).toBeVisible();
+  await expect(window.getByRole('button', { name: 'הקלדת ברקוד' })).toBeVisible();
+  await expect(window.getByRole('button', { name: 'בחרו מסל הקניה' })).toBeVisible();
+  
   await expect(window.getByRole('button', { name: 'chevron back outline חזרה' })).toBeVisible();
   if (weightableItem === 'weightableItem')
   {

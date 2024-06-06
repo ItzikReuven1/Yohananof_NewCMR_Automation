@@ -11,7 +11,7 @@ const { deleteOrderReportFile, getOrders } = require('./getOrders');
 test.beforeAll(setupElectron);
 //test.afterAll(teardownElectron);
 
-test.skip('test 29 - Adding Ghost Weight in CheckOut Screens', async ({}, testInfo) => {
+test('test 29 - Adding Ghost Weight in CheckOut Screens', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
   const { window } = sharedContext;
   test.setTimeout(1000000);
@@ -224,14 +224,14 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('תשלום₪399.90')).toBeVisible();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await buyBags('20');
+  await buyBags('5');
   await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(30000);
+  await window.waitForTimeout(10000);
   // await addWeightMessage();
   // await approveImbalance('placeWeight');
   await window.getByText('דילוג').click();
@@ -258,15 +258,15 @@ await runTest(async (testInfo) => {
   await approveImbalance('placeWeight');
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות20');
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות5');
 
   await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪11.60' }).nth(1)).toBeVisible();
-  await expect(window.getByRole('button', { name: 'תשלום (70 פריטים) ₪401.90' })).toBeVisible();
-  await window.getByRole('contentinfo').getByText('₪401.90').click();
+  await expect(window.getByRole('button', { name: 'תשלום (55 פריטים) ₪400.40' })).toBeVisible();
+  await window.getByRole('contentinfo').getByText('₪400.40').click();
   await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await buyBags('5');
+  await buyBags('2');
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(3000)

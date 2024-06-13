@@ -423,3 +423,13 @@ export const enterPhoneForReceipt = async (phone) => {
   }
   await window.locator('.phone-number-keyboard > .main > .keyboard-header > .number-bottom > ion-button:nth-child(3) > .button-native').click();
 };
+
+////Payment screen////
+export const paymentScreen  = async (cont) => {
+  const { window } = sharedContext;
+  await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
+  await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
+  await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
+  await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
+ 
+};

@@ -4,7 +4,7 @@
     "cartNumber" :"10029",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1918863488248",
+    "dailyBarcode" : "1919204224248",
     "ghostWeight" : "0.020",
     "ghostWeight1" : "0.060"
 },
@@ -38,7 +38,7 @@
     "itemName" :"בירה בקס שישייה 275",
     "itemWeight" :"2.717",
     "itemTag" : "Should expect weight & Allow Quantity Change & Age Restriction",
-    "itemPrice" : "₪29.90"
+    "itemPrice" : "₪34.90"
 },
 
 {
@@ -88,18 +88,18 @@
 {
     "array" : "8",
     "testName" : "testFile6",
-    "itemBarcode":"7290110568276",
-    "itemName" :"יטבתה פרו וניל 350",
-    "itemWeight" :"0.350",
+    "itemBarcode":"7290104066016",
+    "itemName" :"מילקי טופ עדשים",
+    "itemWeight" :"0.170",
     "itemTag" : "Should expect weight & Allow Quantity Change",
-    "itemPrice" : "₪6.90"
+    "itemPrice" : "₪4.60"
 },
 
 {
     "array" : "9",
     "testName" : "testFile6",
-    "itemBarcode":"7200001645894",
-    "itemName" :"קופון יוחננוף משקה חלב פרו 350",
+    "itemBarcode":"7290000977416",
+    "itemName" :"קופון יוחננוף מילקי טופ 6ב24",
     "itemWeight" :"",
     "itemTag" : "",
     "itemPrice" : "₪0.01"

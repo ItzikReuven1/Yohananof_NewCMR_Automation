@@ -4,7 +4,7 @@
     "cartNumber" :"10029",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1919204224248",
+    "dailyBarcode" : "1913635968248",
     "ghostWeight" : "0.020",
     "ghostWeight1" : "0.060"
 },
@@ -17,6 +17,7 @@
     "itemWeight" :"0.275",
     "itemTag" : "Should expect weight & Allow Quantity Change",
     "itemPrice" : "₪4.20",
+    "itemPriceX11" : "₪46.20",
     "promotionName" :"בלו דיי 4 ב12",
     "promotion" : "4.80"
 },
@@ -28,7 +29,9 @@
     "itemName" :"מילקי בטעם שוקולד",
     "itemWeight" :"0.142",
     "itemTag" : "Should expect weight & Is quantity",
-    "itemPrice" : "₪2.90"
+    "itemPrice" : "₪2.90",
+    "itemPriceX4" : "₪11.60",
+    "itemPriceX11" : "₪31.90"
 },
 
 {
@@ -48,7 +51,8 @@
     "itemName" :"שוקולד חלב חמישיה",
     "itemWeight" :"0.523",
     "itemTag" : "Should expect weight & Allow Quantity Change",
-    "itemPrice" : "₪18.90"
+    "itemPrice" : "₪18.90",
+    "itemPriceX16" : "₪302.40"
 },
 
 {
@@ -69,6 +73,7 @@
     "itemWeight" :"1.547",
     "itemTag" : "Should expect weight & Is non scannable & Allow Quantity Change",
     "itemPrice" : "₪2.50",
+    "itemPriceX11" : "₪27.50",
     "promotionName" :"מים מינרלים 4ב9",
     "promotion" : "1.00"
 },
@@ -76,13 +81,14 @@
 {
     "array" : "7",
     "testName" : "testFile4,testFile5,testFile7,testFile8",
-    "itemBarcode":"7290014704602",
-    "itemName" :"מארז קפה טורקי יוחננוף 3*85 גרם",
-    "itemWeight" :"0.255",
+    "itemBarcode":"7290013472205",
+    "itemName" :"פטריות חתוכות מהדרין 400 גרם",
+    "itemWeight" :"0.454",
     "itemTag" : "Should expect weight & Allow Quantity Change",
-    "itemPrice" : "₪13.90",
-    "promotionName" :"קפה שלישייה 2ב22",
-    "promotion" : "5.80"
+    "itemPrice" : "₪5.90",
+    "itemPriceX2" : "₪11.80",
+    "promotionName" :"פטריות חתוכות 2ב11",
+    "promotion" : "₪0.80"
 },
 
 {
@@ -112,7 +118,7 @@
     "itemName" :"בצל יבש",
     "itemWeight" :"1.152",
     "itemTag" : "",
-    "itemPrice" : "₪5.90"
+    "itemPrice" : "₪6.90"
 },
 
 {
@@ -151,7 +157,7 @@
     "itemName" :"בצל יבש",
     "itemWeight" :"0.200",
     "itemTag" : "",
-    "itemPrice" : "₪5.90"
+    "itemPrice" : "₪6.90"
 },
 {
     "array" : "15",

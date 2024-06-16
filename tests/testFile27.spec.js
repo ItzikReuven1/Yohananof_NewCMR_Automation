@@ -41,7 +41,7 @@ await runTest(async (testInfo) => {
 
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[17].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[17].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[17].itemWeight);
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[17].itemNetWeight);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[17].itemPackWeight);
 
   await window.getByRole('contentinfo').getByText('₪11.36').click();

@@ -11,7 +11,7 @@ const { deleteOrderReportFile, getOrders } = require('./getOrders');
 test.beforeAll(setupElectron);
 // test.afterAll(teardownElectron);
 
-test('test 28.01 - InstoreBarcode by Quantity with Promotion', async ({}, testInfo) => {
+test('test 28.02 - InstoreBarcode by Quantity with Promotion', async ({}, testInfo) => {
   await runTest(async (testInfo) => {
     const { window } = sharedContext;
     test.setTimeout(90000);
@@ -95,5 +95,5 @@ test('test 28.01 - InstoreBarcode by Quantity with Promotion', async ({}, testIn
     await window.waitForTimeout(2000);
     await voidTrs('OK');
     await window.waitForTimeout(5000);
-  }, 'test 28.01 - InstoreBarcode by Quantity with Promotion',testInfo);
+  }, 'test 28.02 - InstoreBarcode by Quantity with Promotion',testInfo);
   });

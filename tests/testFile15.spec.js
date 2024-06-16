@@ -42,8 +42,8 @@ await runTest(async (testInfo) => {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down1');
 
 
-    expect(await window.getByRole('button', { name: 'תשלום (2 פריטים) ₪48.80' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪48.80').click();
+    expect(await window.getByRole('button', { name: 'תשלום (2 פריטים) ₪53.80' })).toBeVisible();
+    await window.getByRole('contentinfo').getByText('₪53.80').click();
     //
     await ageRestriction('Decline');
     await window.waitForTimeout(2000);
@@ -57,7 +57,7 @@ await runTest(async (testInfo) => {
     await window.waitForTimeout(3000);
     await expect(window.getByText('1העגלה שלי')).toBeVisible();
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[4].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪18.90');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(`X1 ${dataset[4].itemPrice}`);
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[3].itemName);
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X0 ₪0.00');

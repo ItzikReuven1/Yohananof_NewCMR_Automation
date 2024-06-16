@@ -55,16 +55,15 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await enterPhoneForReceipt('0545656468');
     await expect(window.getByText('Pricetagsקופון מילקי טופ 6ב24-₪3.62')).toBeVisible();
     await paymentScreen();
-    await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
-    await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
-    await window.waitForTimeout(30000);
+    // await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
+    // await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
+    // await window.waitForTimeout(30000);
 
-    await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
-    await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
-    await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
-    await window.getByRole('button', { name: 'חזרה לסל' }).click();
-    await window.waitForTimeout(2000);
-
+    // await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
+    // await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
+    // await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
+    // await window.getByRole('button', { name: 'חזרה לסל' }).click();
+    // await window.waitForTimeout(2000);
 
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪3.62' }).nth(1)).toBeVisible();
     await window.getByText('₪23.99').click();

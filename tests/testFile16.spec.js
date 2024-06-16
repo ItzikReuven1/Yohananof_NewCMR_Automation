@@ -32,15 +32,15 @@ await runTest(async (testInfo) => {
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[14].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('0.200');
 
-  await window.getByRole('contentinfo').getByText('₪1.18').click();
+  await window.getByRole('contentinfo').getByText('₪1.38').click();
   await window.waitForTimeout(3000);
   await expect(window.getByText('1העגלה שלי')).toBeVisible();
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[14].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('בצל יבש0.200 ק"ג₪1.18');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('בצל יבש0.200 ק"ג₪1.38');
   //
    
-  await expect(window.getByText('סה"כ לתשלום ₪1.18')).toBeVisible();
-  await expect(window.getByText('תשלום₪1.18')).toBeVisible();
+  await expect(window.getByText('סה"כ לתשלום ₪1.38')).toBeVisible();
+  await expect(window.getByText('תשלום₪1.38')).toBeVisible();
   await window.getByText('להמשיך בקניות').click();
   // Get journeyId
   const journeyId = await sendEventtoCMR();

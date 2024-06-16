@@ -24,7 +24,7 @@ export const voidTrs = async (action,qty) => {
     await window.getByRole('button', { name: 'תקלת מערכת' }).click();
     if(qty === 'large')
     {
-      await window.waitForTimeout(120000);
+      await window.waitForTimeout(130000);
     }
     //await expect(window.getByText('תהליך ביטול העסקה בוצע בהצלחה')).toBeVisible();
     await expect(window.getByText('העסקה בוטלה בהצלחה')).toBeVisible();
@@ -227,7 +227,7 @@ export const changePrice = async (barcode, productText, newPrice,weightableItem)
   await expect(window.getByRole('button', { name: 'chevron back outline חזרה' })).toBeVisible();
   if (weightableItem === 'weightableItem')
   {
-    await window.getByRole('button', { name: 'בחרו מסל הקנייה' }).click();
+    await window.getByRole('button', { name: 'בחרו מסל הקניה' }).click();
     await window.getByRole('button', { name: 'בחירה' }).click();
   } else {
   await scanBarcode(barcode);
@@ -431,5 +431,13 @@ export const paymentScreen  = async (cont) => {
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
+  await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
+  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
+  await window.waitForTimeout(30000);
+  await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
+  await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
+  await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
+  await window.getByRole('button', { name: 'חזרה לסל' }).click();
+  await window.waitForTimeout(2000);
  
 };

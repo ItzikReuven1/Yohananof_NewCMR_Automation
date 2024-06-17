@@ -28,8 +28,7 @@ test('test 07 - Restore Transaction part 1', async ({}, testInfo) => {
     await window.waitForTimeout(2000);
     await sendSecurityScale(dataset[7].itemWeight)
     await window.waitForTimeout(2000);
-    await window.getByText('1', { exact: true }).click();
-    await changeQuantity('Add',1);
+    await scanBarcode(dataset[7].itemBarcode);
     await window.waitForTimeout(2000);
     const itemWeight1 = parseFloat(dataset[7].itemWeight);
     const weighCalc=itemWeight1*2;

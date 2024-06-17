@@ -25,8 +25,7 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await sendSecurityScale(dataset[7].itemWeight)
     await window.waitForTimeout(2000);
     //
-    await window.getByText('1', { exact: true }).click();
-    await changeQuantity('Add',1);
+    await scanBarcode(dataset[7].itemBarcode);
     await window.waitForTimeout(2000);
     const itemWeight1 = parseFloat(dataset[7].itemWeight);
     let weighCalc=itemWeight1*2;
@@ -34,6 +33,7 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await window.waitForTimeout(2000);
     await scanBarcode(dataset[8].itemBarcode);
     await window.waitForTimeout(2000);
+    await changeQuantity('Add',0);
     const itemWeight2 = parseFloat(dataset[8].itemWeight);
     weighCalc = weighCalc + itemWeight2;
     await sendSecurityScale(weighCalc);
@@ -41,9 +41,9 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     weighCalc = weighCalc - itemWeight1;
     await sendSecurityScale(weighCalc);
     await weightChange('Yes');
-    await window.locator('app-basket-item').filter({ hasText: 'יטבתה פרו וניל 350סה"כ₪6.90' }).getByRole('button').click();
+    await window.locator('app-basket-item').filter({ hasText: `${dataset[8].itemName}סה"כ${dataset[8].itemPrice}` }).getByRole('button').click();
     await expect(window.getByText('הפריט שנסרק או נבחר אינו תואם את הפריט שהוצא מהעגלה. הפעולה בוטלה')).toBeVisible();
-    await window.locator('app-basket-item').filter({ hasText: 'מארז קפה טורקי יוחננוף 3*85' }).getByRole('button').click();
+    await window.locator('app-basket-item').filter({ hasText: dataset[7].itemName }).getByRole('button').click();
     //await window.locator('//*[@id="main-basket-items-container"]/div/div[1]/app-basket-item/div/div/div[6]/ion-button//button').click();
     //await window.click('//*[@id="main-basket-items-container"]/div/div[1]/app-basket-item/div/div/div[6]/ion-button//button');
     await changeQuantity('Remove',1);
@@ -53,24 +53,24 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down1');
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[7].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[7].itemPrice);
-    await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Caret UpCaret Down1');
-    await expect(window.getByText('Pricetagsקפה שלישייה 2ב22-₪5.80')).toBeHidden();
-    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪5.80' }).nth(1)).toBeHidden();
-    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪20.80' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪20.80').click();
+    //await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Caret UpCaret Down1');
+    await expect(window.getByText(`Pricetags${dataset[7].promotionName}-${dataset[7].promotion}`)).toBeHidden();
+    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
+    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪10.50' })).toBeVisible();
+    await window.getByRole('contentinfo').getByText('₪10.50').click();
 
     //
     await window.waitForTimeout(3000);
     await expect(window.getByText('2העגלה שלי')).toBeVisible();
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[8].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪6.90');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(`X1 ${dataset[8].itemPrice}`);
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[7].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X1 ₪13.90');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(`X1 ${dataset[7].itemPrice}`);
     
-    await expect(window.getByText('Pricetagsקפה שלישייה 2ב22-₪5.80')).toBeHidden();
-    await expect(window.getByText('חסכון (מבצעים והנחות) -₪5.80')).toBeHidden();
-    await expect(window.getByText('סה"כ לתשלום ₪20.80')).toBeVisible();
-    await expect(window.getByText('תשלום₪20.80')).toBeVisible();
+    await expect(window.getByText(`Pricetags${dataset[7].promotionName}-${dataset[7].promotion}`)).toBeHidden();
+    await expect(window.getByText('חסכון (מבצעים והנחות) -₪0.80')).toBeHidden();
+    await expect(window.getByText('סה"כ לתשלום ₪10.50')).toBeVisible();
+    await expect(window.getByText('תשלום₪10.50')).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     // Get journeyId
     const journeyId = await sendEventtoCMR();
@@ -80,6 +80,6 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await scanAdminBarcode();
     await window.waitForTimeout(2000);
     await voidTrs('OK');
-    await window.waitForTimeout(10000);
+    await window.waitForTimeout(5000);
   }, 'test 28 - Void incorrect item',testInfo);
   });

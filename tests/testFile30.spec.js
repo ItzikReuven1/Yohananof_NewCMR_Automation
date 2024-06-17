@@ -16,7 +16,7 @@ test('test 30 - Check Orders in MongoDB', async ({}, testInfo) => {
 await runTest(async (testInfo) => {
     const { window } = sharedContext;
     test.setTimeout(180000);
-    await window.waitForTimeout(5000);
+    await window.waitForTimeout(50000);
     ///////
     const journeyIdsFile = fs.readFileSync('journeyIds.json', 'utf8');
     const journeyIds = journeyIdsFile.trim().split('\n').map((line) => line.trim()); // Split by new lines and trim each line

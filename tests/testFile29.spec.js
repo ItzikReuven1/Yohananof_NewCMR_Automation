@@ -305,6 +305,6 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await voidTrs('OK','large');
   await sendSecurityScale(0.0);
-  await window.waitForTimeout(50000);
+  await window.waitForTimeout(5000);
 }, 'test 29 - Adding Ghost Weight in CheckOut Screens',testInfo);
 });

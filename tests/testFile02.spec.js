@@ -32,7 +32,6 @@ await runTest(async (testInfo) => {
     await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
 
-    //await expect(window.getByText('שוקולד חלב חמישיהסה"כ₪18.90מחיר ליח\' :₪18.90כמות1')).toBeVisible();
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[3].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[3].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText('Caret UpCaret Down1');
@@ -40,24 +39,30 @@ await runTest(async (testInfo) => {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[4].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[4].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down1');
+    
+    // Calculate the total price
+    const itemPrice1 = parseFloat(dataset[3].itemPrice.replace('₪', ''));
+    const itemPrice2 = parseFloat(dataset[4].itemPrice.replace('₪', ''));
+    const totalPrice = (itemPrice1 + itemPrice2).toFixed(2);
 
-
-    expect(await window.getByRole('button', { name: 'תשלום (2 פריטים) ₪53.80' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪53.80').click();
+    await expect(window.getByRole('button', { name: `תשלום (2 פריטים) ₪${totalPrice}` })).toBeVisible();
+    await window.getByRole('contentinfo').getByText(`₪${totalPrice}`).click();
+    //await window.getByRole('contentinfo').getByText('₪53.80').click();
     //
     await ageRestriction();
 
-    await window.getByRole('contentinfo').getByText('₪53.80').click();
+    //await window.getByRole('contentinfo').getByText('₪53.80').click();
+    await window.getByRole('contentinfo').getByText(`₪${totalPrice}`).click();
     await window.waitForTimeout(3000);
     await expect(window.getByText('2העגלה שלי')).toBeVisible();
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[3].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X1 ₪34.90');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(`X1 ${dataset[3].itemPrice}`);
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[4].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪18.90');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(`X1 ${dataset[4].itemPrice}`);
 
-    await expect(window.getByText('סה"כ לתשלום ₪53.80')).toBeVisible();
-    await expect(window.getByText('תשלום₪53.80')).toBeVisible();
+    await expect(window.getByText(`סה"כ לתשלום ₪${totalPrice}`)).toBeVisible();
+    await expect(window.getByText(`תשלום₪${totalPrice}`)).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     // Get journeyId
     const journeyId = await sendEventtoCMR();

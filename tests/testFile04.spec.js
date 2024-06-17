@@ -41,9 +41,14 @@ test('test 04 - Item Not Found & Item With Promotion', async ({}, testInfo) => {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[7].promotionName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(2)')).toContainText(dataset[7].promotion);
 
-    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.80' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (2 פריטים) ₪11.00' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪11.00').click();
+    // Calculate the total price
+    const itemPrice1 = parseFloat(dataset[7].itemPriceX2.replace('₪', ''));
+    const itemPrice2 = parseFloat(dataset[7].promotion.replace('₪', ''));
+    const totalPrice = (itemPrice1 - itemPrice2).toFixed(2);
+
+    await expect(window.locator('div').filter({ hasText: `סה"כ חסכת${dataset[7].promotion}` }).nth(1)).toBeVisible();
+    await expect(window.getByRole('button', { name: `תשלום (2 פריטים) ₪${totalPrice}` })).toBeVisible();
+    await window.getByRole('contentinfo').getByText(`₪${totalPrice}`).click();
 
     //
     await window.waitForTimeout(3000);
@@ -53,9 +58,9 @@ test('test 04 - Item Not Found & Item With Promotion', async ({}, testInfo) => {
 
 
     await expect(window.getByText(`Pricetags${dataset[7].promotionName}-${dataset[7].promotion}`)).toBeVisible();
-    await expect(window.getByText('חסכון (מבצעים והנחות) -₪0.80')).toBeVisible();
-    await expect(window.getByText('סה"כ לתשלום ₪11.00')).toBeVisible();
-    await expect(window.getByText('תשלום₪11.00')).toBeVisible();
+    await expect(window.getByText(`חסכון (מבצעים והנחות) -${dataset[7].promotion}`)).toBeVisible();
+    await expect(window.getByText(`סה"כ לתשלום ₪${totalPrice}`)).toBeVisible();
+    await expect(window.getByText(`תשלום₪${totalPrice}`)).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     // Get journeyId
     const journeyId = await sendEventtoCMR();

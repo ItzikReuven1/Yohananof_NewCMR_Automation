@@ -73,6 +73,7 @@
     "itemWeight" :"1.547",
     "itemTag" : "Should expect weight & Is non scannable & Allow Quantity Change",
     "itemPrice" : "₪2.50",
+    "itemPriceX2" : "₪5.00",
     "itemPriceX11" : "₪27.50",
     "promotionName" :"מים מינרלים 4ב9",
     "promotion" : "1.00"

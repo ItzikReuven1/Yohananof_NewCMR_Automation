@@ -11,7 +11,7 @@ const { deleteOrderReportFile, getOrders } = require('./getOrders');
 test.beforeAll(setupElectron);
 
 test('test 03 - Light Weight Item & Change Price', async ({}, testInfo)=> {
- await runTest(async (testInfo) => {
+    await runTest(async (testInfo) => {
     const { window } = sharedContext;
     test.setTimeout(90000);
     await restoreMessage("Cancel");
@@ -28,11 +28,11 @@ test('test 03 - Light Weight Item & Change Price', async ({}, testInfo)=> {
     await window.waitForTimeout(2000);
     await window.locator('ion-button').filter({ hasText: 'מים מינרלים גדול' }).locator('img').click();
     await window.waitForTimeout(3000);
-     ////weight Calcultion
-     const itemWeight1 = parseFloat(dataset[5].itemWeight);
-     const itemWeight2 = parseFloat(dataset[6].itemWeight);
-     const weighCalc=itemWeight2 + itemWeight1;
-     await sendSecurityScale(weighCalc);
+    ////weight Calcultion
+    const itemWeight1 = parseFloat(dataset[5].itemWeight);
+    const itemWeight2 = parseFloat(dataset[6].itemWeight);
+    const weighCalc=itemWeight2 + itemWeight1;
+    await sendSecurityScale(weighCalc);
     await window.waitForTimeout(2000);
     await window.locator('ion-button').filter({ hasText: 'משקאות' }).locator('svg').click();
     await window.waitForTimeout(2000);
@@ -48,8 +48,13 @@ test('test 03 - Light Weight Item & Change Price', async ({}, testInfo)=> {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[6].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[6].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down2');
+    // Calculate the total price
+    const itemPrice1 = parseFloat(dataset[5].itemPrice.replace('₪', ''));
+    const itemPrice2 = parseFloat(dataset[6].itemPriceX2.replace('₪', ''));
+    const totalPrice = (itemPrice1 + itemPrice2).toFixed(2);
+    
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (3 פריטים) ₪8.50' })).toBeVisible();
+    await expect(window.getByRole('button', { name: `תשלום (3 פריטים) ₪${totalPrice}` })).toBeVisible();
     await scanAdminBarcode();
     await changePrice(dataset[6].itemBarcode,dataset[6].itemName,'150');
     //
@@ -61,7 +66,7 @@ test('test 03 - Light Weight Item & Change Price', async ({}, testInfo)=> {
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X2 ₪3.00');
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[5].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X1 ₪3.50');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(`X1 ${dataset[5].itemPrice}`);
 
     await expect(window.getByText('סה"כ לתשלום ₪6.50')).toBeVisible();
     await expect(window.getByText('תשלום₪6.50')).toBeVisible();

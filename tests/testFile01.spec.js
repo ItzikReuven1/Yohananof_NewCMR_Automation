@@ -52,17 +52,22 @@ await runTest(async (testInfo) => {
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('Caret UpCaret Down4');
 
   //await window.locator('#main > app-main-basket > ion-footer > app-main-footer > div > ion-button > div > div.button-payment-amount').click();
-  await window.getByRole('contentinfo').getByText('₪15.80').click();
+  // Calculate the total price
+  const itemPrice1 = parseFloat(dataset[2].itemPriceX4.replace('₪', ''));
+  const itemPrice2 = parseFloat(dataset[1].itemPrice.replace('₪', ''));
+  const totalPrice = (itemPrice1 + itemPrice2).toFixed(2);
+ 
+  await window.getByRole('contentinfo').getByText(`₪${totalPrice}`).click();
   await window.waitForTimeout(3000);
   await expect(window.getByText('5העגלה שלי')).toBeVisible();
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[2].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X4 ₪11.60');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(`X4 ${dataset[2].itemPriceX4}`);
   //
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[1].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X1 ₪4.20');
-  // 
-  await expect(window.getByText('סה"כ לתשלום ₪15.80')).toBeVisible();
-  await expect(window.getByText('תשלום₪15.80')).toBeVisible();
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(`X1 ${dataset[1].itemPrice}`);
+
+  await expect(window.getByText(`סה"כ לתשלום ₪${totalPrice}`)).toBeVisible();
+  await expect(window.getByText(`תשלום₪${totalPrice}`)).toBeVisible();
   await window.getByText('להמשיך בקניות').click();
   // Get journeyId
   const journeyId = await sendEventtoCMR();

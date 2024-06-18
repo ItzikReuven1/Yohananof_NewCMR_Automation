@@ -41,42 +41,41 @@ test('test 06 - Items With Coupon', async ({}, testInfo) => {
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[9].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[9].itemPrice);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות1');
+    // Calculate the total price
+    const itemPrice1 = parseFloat(dataset[8].itemPriceX6.replace('₪', ''));
+    const itemPrice2 = parseFloat(dataset[9].itemPrice.replace('₪', ''));
+    let totalPrice = (itemPrice1 + itemPrice2).toFixed(2);
+    
+    
     await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪0.00' }).nth(1)).toBeVisible();
-    await expect(window.getByRole('button', { name: 'תשלום (7 פריטים) ₪27.61' })).toBeVisible();
-    await window.getByRole('contentinfo').getByText('₪27.61').click();
-    
+    await expect(window.getByRole('button', { name: `תשלום (7 פריטים) ₪${totalPrice}` })).toBeVisible();
+    await window.getByRole('contentinfo').getByText(`₪${totalPrice}`).click();
 
-    
     await window.getByText('המשך').click();
-
     await window.waitForTimeout(2000);
-    //await window.getByRole('button', { name: 'דילוג' }).click();
     await window.getByText('דילוג').click();
     await enterPhoneForReceipt('0545656468');
-    await expect(window.getByText('Pricetagsקופון מילקי טופ 6ב24-₪3.62')).toBeVisible();
+    //await expect(window.getByText('Pricetagsקופון מילקי טופ 6ב24-₪3.62')).toBeVisible();
+    await expect(window.getByText(`Pricetags${dataset[9].promotionName}-${dataset[9].promotion}`)).toBeVisible();
+    const itemPrice3 = parseFloat(dataset[9].promotion.replace('₪', ''));
+    totalPrice = totalPrice - itemPrice3;
     await paymentScreen();
-    // await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
-    // await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
-    // await window.waitForTimeout(30000);
 
-    // await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
-    // await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
-    // await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
-    // await window.getByRole('button', { name: 'חזרה לסל' }).click();
-    // await window.waitForTimeout(2000);
+    await expect(window.locator('div').filter({ hasText: `סה"כ חסכת${dataset[9].promotion}` }).nth(1)).toBeVisible();
+    await expect(window.getByRole('button', { name: `תשלום (7 פריטים) ₪${totalPrice}` })).toBeVisible();
+    await window.getByRole('contentinfo').getByText(`₪${totalPrice}`).click();
 
-    await expect(window.locator('div').filter({ hasText: 'סה"כ חסכת₪3.62' }).nth(1)).toBeVisible();
-    await window.getByText('₪23.99').click();
     await window.waitForTimeout(2000);
     await expect(window.getByText('7העגלה שלי')).toBeVisible();
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[9].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('X1 ₪0.01');
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(`X1 ${dataset[9].itemPrice}`);
     //
     await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(dataset[8].itemName);
-    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText('X6 ₪27.60');
-    await expect(window.getByText('Pricetagsקופון מילקי טופ 6ב24-₪3.62')).toBeVisible();
-    await expect(window.getByText('חסכון (מבצעים והנחות) -₪3.62')).toBeVisible();
-    await expect(window.getByText('סה"כ לתשלום ₪23.99')).toBeVisible();
+    await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(2)')).toContainText(`X6 ${dataset[8].itemPriceX6}`);
+    await expect(window.getByText(`Pricetags${dataset[9].promotionName}-${dataset[9].promotion}`)).toBeVisible();
+    await expect(window.getByText(`חסכון (מבצעים והנחות) -${dataset[9].promotion}`)).toBeVisible();
+    await expect(window.getByText(`סה"כ לתשלום ₪${totalPrice}`)).toBeVisible();
+    await expect(window.getByText(`תשלום₪${totalPrice}`)).toBeVisible();
     await window.getByText('להמשיך בקניות').click();
     // Get journeyId
     const journeyId = await sendEventtoCMR();

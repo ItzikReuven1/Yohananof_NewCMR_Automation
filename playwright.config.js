@@ -50,7 +50,7 @@ module.exports = defineConfig({
       testMatch: ['**/testFile01.spec.js', '**/testFile02.spec.js', '**/testFile03.spec.js', '**/testFile04.spec.js', '**/testFile05.spec.js', '**/testFile06.spec.js'
       , '**/testFile07.spec.js', '**/testFile08.spec.js', '**/testFile09.spec.js','**/testFile10.spec.js','**/testFile11.spec.js','**/testFile12.spec.js','**/testFile13.spec.js','**/testFile14.spec.js','**/testFile15.spec.js',
       '**/testFile16.spec.js','**/testFile17.spec.js','**/testFile18.spec.js','**/testFile19.spec.js','**/testFile20.spec.js','**/testFile21.spec.js','**/testFile22.spec.js','**/testFile23.spec.js','**/testFile24.spec.js','**/testFile25.spec.js',
-      '**/testFile26.spec.js','**/testFile27.spec.js','**/testFile28.spec.js','**/testFile29.spec.js','**/testFile30.spec.js','**/testFile28.01.spec.js','**/testFile28.02.spec.js'],
+      '**/testFile26.spec.js','**/testFile27.spec.js','**/testFile28.spec.js','**/testFile29.spec.js','**/testFile30.spec.js','**/testFile28.01.spec.js','**/testFile28.02.spec.js','**/testFile28.03.spec.js','**/testFile28.04.spec.js'],
       // ...
     },
   ],

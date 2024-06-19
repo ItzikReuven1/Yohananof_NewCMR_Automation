@@ -425,11 +425,13 @@ export const enterPhoneForReceipt = async (phone) => {
 };
 
 ////Payment screen////
-export const paymentScreen  = async (cont) => {
+export const paymentScreen  = async (payment,number) => {
   const { window } = sharedContext;
   await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
+  if (payment==='credit')
+  {
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
   await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
@@ -439,5 +441,25 @@ export const paymentScreen  = async (cont) => {
   await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
   await window.waitForTimeout(2000);
- 
+  }
+  if (payment==='giftcard')
+  {
+  await window.getByRole('img', { name: 'כרטיס מתנה' }).click();
+  await expect(window.getByText('למימוש תווי השי יש לבחור את דרך ההזנה')).toBeVisible();
+  await expect(window.getByText('יש לסרוק או להקליד את מספר תו השי')).toBeVisible();
+  await expect(window.getByText('העברה של תו השי במסוף')).toBeVisible();
+  await window.getByText('יש לסרוק או להקליד את מספר תו השי').click();
+  expect(await window.locator('app-type-gift-card-number').screenshot()).toMatchSnapshot('giftCard.png');
+  await scanBarcode(number);
+  await window.waitForTimeout(5000);
+  };
 };
+
+
+export const endShopping = async () => {
+  const { window } = sharedContext;
+  await expect(window.getByText('התשלום הסתיים')).toBeVisible();
+  await expect(window.getByRole('heading', { name: 'תודה שקניתם אצלנו' })).toBeVisible();
+  await expect(window.getByRole('heading', { name: 'קבלה דיגיטלית נשלחה לנייד בהודעת סמס' })).toBeVisible();
+  await expect(window.getByRole('heading', { name: 'נא להחזיר את העגלה למתחם העגלות החכמות' })).toBeVisible();
+  };

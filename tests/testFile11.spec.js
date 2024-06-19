@@ -175,16 +175,9 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(30000);
   await window.getByText('דילוג').click();
   await enterPhoneForReceipt('0545656468');
-  await paymentScreen();
-  // await window.waitForTimeout(8000);
-  // await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
-  // await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
-  // await window.waitForTimeout(30000);
-  // await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
-  // await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
-  // await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
-  // await window.getByRole('button', { name: 'חזרה לסל' }).click();
-  // await window.waitForTimeout(2000);
+  const pay = "credit";
+  await paymentScreen(pay);
+
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות20');

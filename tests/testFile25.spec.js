@@ -226,7 +226,8 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(30000);
   await window.getByText('דילוג').click();
   await enterPhoneForReceipt('0545656468');
-  await paymentScreen();
+  const pay = "credit";
+  await paymentScreen(pay);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות20');

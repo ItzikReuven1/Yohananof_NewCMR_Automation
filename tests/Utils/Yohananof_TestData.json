@@ -4,9 +4,11 @@
     "cartNumber" :"10029",
     "cartVersion" :"25.38.12",
     "SroreName" :"Yohananof",
-    "dailyBarcode" : "1916590464248",
+    "dailyBarcode" : "1918067712248",
     "ghostWeight" : "0.020",
-    "ghostWeight1" : "0.060"
+    "ghostWeight1" : "0.060",
+    "giftCard" : "101614724667",
+    "giftCard2" : "1000240596794"
 },
 
 {
@@ -100,6 +102,7 @@
     "itemWeight" :"0.170",
     "itemTag" : "Should expect weight & Allow Quantity Change",
     "itemPrice" : "₪4.60",
+    "itemPriceX2" : "₪9.20",
     "itemPriceX6" : "₪27.60"
 },
 

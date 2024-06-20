@@ -11,7 +11,7 @@ const { deleteOrderReportFile, getOrders } = require('./getOrders');
 test.beforeAll(setupElectron);
 //test.afterAll(teardownElectron);
 
-test('test 28 - Void incorrect item', async ({}, testInfo) => {
+test('test 28.00 - Void incorrect item', async ({}, testInfo) => {
   await runTest(async (testInfo) => {
     const { window } = sharedContext;
     test.setTimeout(180000);
@@ -81,5 +81,5 @@ test('test 28 - Void incorrect item', async ({}, testInfo) => {
     await window.waitForTimeout(2000);
     await voidTrs('OK');
     await window.waitForTimeout(5000);
-  }, 'test 28 - Void incorrect item',testInfo);
+  }, 'test 28.00 - Void incorrect item',testInfo);
   });

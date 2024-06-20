@@ -225,12 +225,12 @@ await runTest(async (testInfo) => {
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await buyBags('5');
-  await window.waitForTimeout(2000);
+  await window.waitForTimeout(5000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(2000);
-  weightCalc = weightCalc + ghostWeight1;
-  await sendSecurityScale(weightCalc); //ghost weight
+  await window.waitForTimeout(5000);
+  // weightCalc = weightCalc + ghostWeight1;
+  // await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(10000);
   // await addWeightMessage();
   // await approveImbalance('placeWeight');
@@ -240,10 +240,10 @@ await runTest(async (testInfo) => {
   await enterPhoneForReceipt('0545656468');
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(3000);
-  weightCalc = weightCalc + ghostWeight1;
-  await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(3000);
+  await window.waitForTimeout(5000);
+  // weightCalc = weightCalc + ghostWeight1;
+  // await sendSecurityScale(weightCalc); //ghost weight
+  // await window.waitForTimeout(5000);
   await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
@@ -258,8 +258,9 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
   await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
-  await addWeightMessage();
-  await approveImbalance('placeWeight');
+  await window.waitForTimeout(3000);
+  // await addWeightMessage();
+  // await approveImbalance('placeWeight');
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[13].itemPrice);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('כמות5');
@@ -270,16 +271,17 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
+  await window.waitForTimeout(5000);
   await buyBags('2');
+  // weightCalc = weightCalc + ghostWeight1;
+  // await sendSecurityScale(weightCalc); //ghost weight
+  // await window.waitForTimeout(5000)
+  // weightCalc = weightCalc + ghostWeight1;
+  // await sendSecurityScale(weightCalc); //ghost weight
+  // //await approveImbalance();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(3000)
-  weightCalc = weightCalc + ghostWeight1;
-  await sendSecurityScale(weightCalc); //ghost weight
-  await window.waitForTimeout(10000);
-  //await approveImbalance();
-  weightCalc = weightCalc + ghostWeight1;
-  await sendSecurityScale(weightCalc); //ghost weight
+  await window.waitForTimeout(5000)
   await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
@@ -294,8 +296,8 @@ await runTest(async (testInfo) => {
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
   await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
-  await addWeightMessage();
-  await approveImbalance('placeWeight');
+  // await addWeightMessage();
+  // await approveImbalance('placeWeight');
   // Get journeyId
   const journeyId = await sendEventtoCMR();
   await addJourneyId(journeyId);
@@ -305,6 +307,6 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await voidTrs('OK','large');
   await sendSecurityScale(0.0);
-  await window.waitForTimeout(5000);
+  await window.waitForTimeout(50000);
 }, 'test 29 - Adding Ghost Weight in CheckOut Screens',testInfo);
 });

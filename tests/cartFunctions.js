@@ -175,13 +175,13 @@ export const weightChange = async (action) => {
   const { window } = sharedContext;
   //await expect(window.getByRole('img', { name: 'help circle outline' }).locator('path').nth(1)).toBeVisible();
   await expect(window.getByText('להסרה, יש לבחור את הפריט הרצוי')).toBeVisible();
-  //await expect(window.getByText('רוצה למחוק פריט מסל הקניות?')).toBeVisible();
+  await expect(window.getByText('הימנעו מלהישען על העגלה עד לקליטת המחיקה')).toBeVisible();
+  await window.waitForTimeout(5000)
+  await expect(window.getByRole('button', { name: 'לא רוצה למחוק' })).toBeVisible();
   
   if (action === 'Yes') {
     // await window.getByRole('button', { name: 'כן, רוצה למחוק' }).click();
-    // await expect(window.getByText('בחרו את הפריט שתרצו להסיר')).toBeVisible();
-    // await expect(window.getByText('להסרה, סרקו הפריט או לחצו על')).toBeVisible();
-    // await expect(window.getByRole('button', { name: 'chevron forward outline חזרה' })).toBeVisible();
+    
   } else if (action === 'No') {
     await window.getByRole('button', { name: 'לא רוצה למחוק' }).click();
   } 
@@ -318,16 +318,16 @@ export const cartUnlock  = async () => {
 ////Add Weight change message////
 export const addWeightMessage  = async (info,help) => {
   const { window } = sharedContext;
-  //await expect(window.getByText('שמנו לב לשינוי במשקל העגלה')).toBeVisible();
   await expect(window.getByText('יש להוציא את הפריט האחרון')).toBeVisible();
   await expect(window.getByRole('img', { name: 'scanner' })).toBeVisible();
   await expect(window.getByText('במקרה והבעיה נמשכת - יש לקרוא לעזרה')).toBeVisible();
+  await window.waitForTimeout(5000);
 
-  // if (info === 'Info') {
-  //   await window.getByRole('button', { name: 'help circle outline להסבר אודות הוספת פריט' }).click();
-  //   expect(await window.locator('#overWeight > app-process-modal > div').screenshot()).toMatchSnapshot('How_To_Add_Item.png');
-  //   await window.getByRole('button', { name: 'chevron forward outline חזרה' }).click();
-  // }
+  if (info === 'noAdded') {
+  await window.getByRole('button', { name: 'לא הוספתי כלום' }).click();
+  } else { 
+    await expect(window.getByRole('button', { name: 'לא הוספתי כלום' })).toBeHidden();
+  }
 
   if (help === 'Help') {
    await getHelp('tohelp');

@@ -1,6 +1,6 @@
 const { _electron: electron } = require('@playwright/test');
 const { test, expect, request } = require('@playwright/test');
-const { getHelp, startTrs, voidTrs, ageRestriction, itemNotFound, changeQuantity, weightChange, restoreMessage } = require('./cartFunctions');
+const { getHelp, startTrs, voidTrs, ageRestriction, itemNotFound, changeQuantity, weightChange, restoreMessage, addWeightMessage } = require('./cartFunctions');
 const { setupElectron, teardownElectron, sharedContext } = require('./electronSetup1');
 const { scanBarcode, scanAdminBarcode, sendSecurityScale } = require('./scannerAndWeightUtils');
 const { runTest } = require('./testWrapper');
@@ -10,7 +10,7 @@ const { deleteOrderReportFile, getOrders } = require('./getOrders');
 
 test.beforeAll(setupElectron);
 
-test('test 05 - Void item', async ({}, testInfo) => {
+test('test 05 - Void item & Dont want to remove', async ({}, testInfo) => {
   await runTest(async (testInfo) => {
     const { window } = sharedContext;
     test.setTimeout(90000);
@@ -29,11 +29,24 @@ test('test 05 - Void item', async ({}, testInfo) => {
     const itemWeight1 = parseFloat(dataset[7].itemWeight);
     const weighCalc=itemWeight1*2;
     await sendSecurityScale(weighCalc);
-    await window.waitForTimeout(4000);
+    await window.waitForTimeout(2000);
+    await sendSecurityScale(dataset[7].itemWeight);
+    await weightChange('No');
+    await window.waitForTimeout(2000);
+    await sendSecurityScale(weighCalc);
+    await window.waitForTimeout(2000);
+    await addWeightMessage('noAdded');
+    await window.waitForTimeout(2000);
     await sendSecurityScale(dataset[7].itemWeight);
     await weightChange('Yes');
     await window.getByRole('button', { name: 'trash outline' }).click();
     await changeQuantity('Remove',1);
+    await window.waitForTimeout(2000);
+    await sendSecurityScale(weighCalc);
+    await addWeightMessage();
+    await window.waitForTimeout(2000);
+    await sendSecurityScale(dataset[7].itemWeight);
+    await window.waitForTimeout(2000);
   
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[7].itemName);
     await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[7].itemPrice);
@@ -62,5 +75,5 @@ test('test 05 - Void item', async ({}, testInfo) => {
     await window.waitForTimeout(2000);
     await voidTrs('OK');
     await window.waitForTimeout(5000);
-  }, 'test 05 - Void item',testInfo);
+  }, 'test 05 - Void item & Dont want to remove',testInfo);
   });

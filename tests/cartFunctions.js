@@ -70,36 +70,28 @@ export const getHelp = async (help,cancel) => {
 export const startTrs = async (first,bagWeight,before) => {
   const { window } = sharedContext;
   await expect(window).toHaveTitle("Cust2mate");
-  // Direct Electron console to Node terminal.
   window.on('console', console.log);
-  // await window.getByText('EN').click();
-  // await window.waitForTimeout(2000);
-  // await window.getByText('he', { exact: true }).click();
-  // await window.waitForTimeout(2000);
-  //await expect(window.getByText('en')).toBeVisible();
   await expect(window.locator('#battery-status-container svg')).toBeVisible();
-  //await expect(window.getByText('ברוכים הבאים')).toBeVisible();
-  //await expect(window.getByText('מגדירים מחדש את עתיד הקניות')).toBeVisible();
-  //await expect(window.getByText('Cash payment is not permitted in the smart cart')).toBeVisible();
-  console.log("getCounter is : " + getCounter());
-  // if (first === 1) {
-  // //expect(await window.getByRole('img', { name: '#' }).screenshot()).toMatchSnapshot('Yohananof Logo.png');
-  // expect(await window.getByRole('img', { name: 'captured-image' }).first().screenshot()).toMatchSnapshot('Yohananof Logo.png');
-  // }
+  await expect(window.getByText('עגלה חכמהבלי לעמוד בתור בקופה')).toBeVisible();
+  await expect(window.locator('app-before-buying div').filter({ hasText: 'התשלום באשראי בלבד' }).nth(3)).toBeVisible();
+  //console.log("getCounter is : " + getCounter());
+  if (first === 1) {
+  expect(await window.getByRole('img', { name: 'captured-image' }).screenshot()).toMatchSnapshot('Yohananof Logo.png');
+  expect(await window.locator('app-header img').screenshot()).toMatchSnapshot('Yohananof Heaser Logo.png');
+  }
   if (typeof bagWeight === 'number' && before === '1') {
     await sendSecurityScale(bagWeight);
       }
   await window.getByRole('button', { name: 'התחילו לקנות' }).click();
   await window.waitForTimeout(3000);
-  //await expect(window.getByText('הזינו מספר נייד או מועדון להתחלה')).toBeVisible();
-  //await expect(window.getByText('סרקו את כרטיס המועדון שלכם')).toBeVisible();
-  //await expect(window.locator('app-terms-conditions div').filter({ hasText: 'קראתי ואני מסכימ/ה ל תנאי השימוש וגם מדיניות פרטיות' }).nth(3)).toBeVisible();
+  await expect(window.getByText('הזינו את מספר הנייד להתחלה ולקבלת החשבונית')).toBeVisible();
+  await expect(window.locator('app-terms-conditions div').filter({ hasText: 'קראתי ואני מסכימ/ה ל תנאי השימוש וגם מדיניות פרטיות' }).nth(3)).toBeVisible();
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await window.locator('app-manager-options').getByText('דילוג אימות מספר נייד').click();
   await window.waitForTimeout(2000);
-  //await expect(window.getByText('היי,')).toBeVisible();
-  //await expect(window.getByText('הניחו בעגלה חפצים אישיים ושקיות קנייה לפני תחילת הקניות. שימו לב, לא ניתן להושיב ילדים בעגלה!')).toBeVisible();
+  await expect(window.getByText('שלום')).toBeVisible();
+  await expect(window.getByText('הניחו בעגלה חפצים אישיים ושקיות קניה לפני תחילת הקניות. שימו לב, לא ניתן להושיב ילדים בעגלה')).toBeVisible();
   if (typeof bagWeight === 'number' && before !== '1') {
   await sendSecurityScale(bagWeight);
     }
@@ -181,7 +173,7 @@ export const weightChange = async (action) => {
   
   if (action === 'Yes') {
     // await window.getByRole('button', { name: 'כן, רוצה למחוק' }).click();
-    
+
   } else if (action === 'No') {
     await window.getByRole('button', { name: 'לא רוצה למחוק' }).click();
   } 

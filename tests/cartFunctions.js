@@ -15,7 +15,7 @@ export const voidTrs = async (action,qty) => {
   await expect(window.getByText('שימו לב שהפריטים ימחקו ללא אפשרות שחזור')).toBeVisible();
 
   if (action === 'OK') {
-    await window.getByRole('button', { name: 'אישור' }).click();
+    await window.getByRole('button', { name: 'אישור', exact: true }).click();
     await expect(window.getByText('מה הסיבה לביטול?')).toBeVisible();
     await expect(window.getByRole('button', { name: 'תקלת מערכת' })).toBeVisible();
     await expect(window.getByRole('button', { name: 'עגלה נטושה' })).toBeVisible();

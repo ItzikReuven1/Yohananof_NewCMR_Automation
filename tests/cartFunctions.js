@@ -166,7 +166,7 @@ export const changeQuantity = async (action,quantity) => {
 export const weightChange = async (action) => {
   const { window } = sharedContext;
   //await expect(window.getByRole('img', { name: 'help circle outline' }).locator('path').nth(1)).toBeVisible();
-  await expect(window.getByText('להסרה, יש לבחור את הפריט הרצוי')).toBeVisible();
+  await expect(window.getByText('בחרו את הפריט להסרה')).toBeVisible();
   await expect(window.getByText('הימנעו מלהישען על העגלה עד לקליטת המחיקה')).toBeVisible();
   await window.waitForTimeout(5000)
   await expect(window.getByRole('button', { name: 'לא רוצה למחוק' })).toBeVisible();
@@ -310,7 +310,7 @@ export const cartUnlock  = async () => {
 ////Add Weight change message////
 export const addWeightMessage  = async (info,help) => {
   const { window } = sharedContext;
-  await expect(window.getByText('יש להוציא את הפריט האחרון')).toBeVisible();
+  await expect(window.getByText('שמנו לב שנוספו לעגלה פריטים שלא נסרקו')).toBeVisible();
   await expect(window.getByRole('img', { name: 'scanner' })).toBeVisible();
   await expect(window.getByText('במקרה והבעיה נמשכת - יש לקרוא לעזרה')).toBeVisible();
   await window.waitForTimeout(5000);
@@ -414,12 +414,13 @@ export const enterPhoneForReceipt = async (phone) => {
     await window.getByRole('button', { name: digit }).click();
   }
   await window.locator('.phone-number-keyboard > .main > .keyboard-header > .number-bottom > ion-button:nth-child(3) > .button-native').click();
+  await window.waitForTimeout(2000);
 };
 
 ////Payment screen////
 export const paymentScreen  = async (payment,number) => {
   const { window } = sharedContext;
-  await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
+  await expect(window.getByText('בחרו את אופן התשלום')).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
   if (payment==='credit')
@@ -430,7 +431,7 @@ export const paymentScreen  = async (payment,number) => {
   await window.waitForTimeout(30000);
   await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
-  await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
+  await expect(window.getByText('חיזרו לסל הקניות ונסו שנית או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
   await window.waitForTimeout(2000);
   }

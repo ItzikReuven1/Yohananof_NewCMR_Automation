@@ -18,6 +18,9 @@ await runTest(async (testInfo) => {
     //test.setTimeout(180000);
     //await window.waitForTimeout(50000);
     ///////
+    await restoreMessage("Cancel");
+    await sendSecurityScale(0.0);
+    await window.waitForTimeout(2000);
     const journeyIdsFile = fs.readFileSync('journeyIds.json', 'utf8');
     const journeyIds = journeyIdsFile.trim().split('\n').map((line) => line.trim()); // Split by new lines and trim each line
     // Call getOrders with the array of journeyIds

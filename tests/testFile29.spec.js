@@ -244,7 +244,7 @@ await runTest(async (testInfo) => {
   // weightCalc = weightCalc + ghostWeight1;
   // await sendSecurityScale(weightCalc); //ghost weight
   // await window.waitForTimeout(5000);
-  await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
+  await expect(window.getByText('בחרו את אופן התשלום')).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
@@ -256,7 +256,7 @@ await runTest(async (testInfo) => {
 
   await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
-  await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
+  await expect(window.getByText('חיזרו לסל הקניות ונסו שנית או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
   await window.waitForTimeout(3000);
   // await addWeightMessage();
@@ -282,7 +282,7 @@ await runTest(async (testInfo) => {
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(5000)
-  await expect(window.getByText('בחרו את אופן תשלום')).toBeVisible();
+  await expect(window.getByText('בחרו את אופן התשלום')).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^כרטיס אשראי$/ }).first()).toBeVisible();
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
@@ -294,7 +294,7 @@ await runTest(async (testInfo) => {
 
   await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();
-  await expect(window.getByText('חיזרו לסל הקניות ונסו שנות או קראו לצוות התמיכה')).toBeVisible();
+  await expect(window.getByText('חיזרו לסל הקניות ונסו שנית או קראו לצוות התמיכה')).toBeVisible();
   await window.getByRole('button', { name: 'חזרה לסל' }).click();
   // await addWeightMessage();
   // await approveImbalance('placeWeight');

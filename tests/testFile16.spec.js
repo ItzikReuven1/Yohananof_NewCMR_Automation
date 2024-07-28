@@ -23,20 +23,21 @@ await runTest(async (testInfo) => {
   await window.waitForTimeout(2000);
   await window.locator('ion-button').filter({ hasText: 'ירקות' }).locator('svg').click();
   
-  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,'0.200','approve','','',null,'');
+  await weightableItem(dataset[14].itemName,dataset[14].itemPrice,dataset[14].itemWeight,'approve','','',null,'');
   await window.waitForTimeout(2000);
   await sendSecurityScale(dataset[14].itemWeight);
   await window.getByRole('button', { name: 'chevron back outline חזרה' }).click();
   
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[14].itemName);
   await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[14].itemPrice);
-  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText('0.200');
+  await expect(window.locator('#main-basket-items-container > div > div:nth-child(1)')).toContainText(dataset[14].itemWeight);
 
   await window.getByRole('contentinfo').getByText('₪1.38').click();
   await window.waitForTimeout(3000);
   await expect(window.getByText('1העגלה שלי')).toBeVisible();
   await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[14].itemName);
-  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText('בצל יבש0.200 ק"ג₪1.38');
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[14].itemWeight);
+  await expect(window.locator('#main > app-plastic-bag > app-main-content > div > div.is-rtl.side > app-minimal-basket > div > div.items > app-minimal-basket-item:nth-child(1)')).toContainText(dataset[14].ItemWeightedPrice);
   //
    
   await expect(window.getByText('סה"כ לתשלום ₪1.38')).toBeVisible();

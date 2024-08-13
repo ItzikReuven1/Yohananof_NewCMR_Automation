@@ -200,7 +200,7 @@ export const restoreSuccessful  = async () => {
   const { window } = sharedContext;
   await expect(window.locator('div').filter({ hasText: 'שיחזור' })).toBeVisible();
   await expect(window.getByText('שחזור הפריטים בוצע בהצלחה')).toBeVisible();
-  await window.getByRole('button', { name: 'המשיכו בקניות' }).click();
+  await window.getByRole('button', { name: 'לחזור לסל הקניות' }).click();
  
 };
 
@@ -250,7 +250,7 @@ export const changePrice = async (barcode, productText, newPrice,weightableItem)
 export const weightMismatch  = async (remove) => {
   const { window } = sharedContext;
   if (remove == 'Remove') {
-    await expect(window.getByText('הפריט שנסרק או נבחר אינו תואם את הפריט שהוצא מהעגלה. הפעולה בוטלה')).toBeVisible();
+    await expect(window.getByText('הפריט שרציתם להסיר אינו תואם את הפריט שהוצא מהעגלה.>br')).toBeVisible();
     await expect(window.locator('app-alert-location-embedded div').filter({ hasText: 'Alert Circle' }).nth(1)).toBeVisible();
   } else {
     await expect(window.locator('#basket div').filter({ hasText: 'המוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו ' }).nth(1)).toBeVisible();
@@ -310,7 +310,8 @@ export const cartUnlock  = async () => {
 ////Add Weight change message////
 export const addWeightMessage  = async (info,help) => {
   const { window } = sharedContext;
-  await expect(window.getByText('שמנו לב שנוספו לעגלה פריטים שלא נסרקו')).toBeVisible();
+  await expect(window.getByText('האם הוספתם פריטים לעגלה?')).toBeVisible();
+  await expect(window.getByText('בדקו במסך מהו הפריט האחרון שנקלטסרקו שוב את הפריטים שהוכנסו אחריו')).toBeVisible();
   await expect(window.getByRole('img', { name: 'scanner' })).toBeVisible();
   await expect(window.getByText('במקרה והבעיה נמשכת - יש לקרוא לעזרה')).toBeVisible();
   await window.waitForTimeout(5000);

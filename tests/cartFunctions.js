@@ -60,7 +60,7 @@ export const getHelp = async (help,cancel) => {
     await expect(window.getByText('קריאתך התקבלה')).toBeVisible();
     await expect(window.getByText('אפשר בינתיים להמשיך בקניות בקרבת מקום,כך שנוכל למצוא אותך בקלות')).toBeVisible();
     await expect(window.getByText('אם הסתדרת כבר, ניתן לבטל את הקריאה')).toBeVisible();
-    await window.getByRole('button', { name: 'המשיכו בקניות' }).click();
+    await window.getByRole('button', { name: 'לחזור לסל הקניות' }).click();
     await expect(window.locator('ion-button.active-support-call')).toBeVisible();
   }
 
@@ -133,7 +133,7 @@ export const ageRestriction = async () => {
 export const itemNotFound = async (action) => {
   const { window } = sharedContext;
   await expect(window.getByText('לא זיהינו את הפריט')).toBeVisible();
-  await expect(window.getByText('חפשו ברקוד נוסף על המוצר או קראו לעזרה')).toBeVisible();
+  await expect(window.getByText('חפשו ברקוד נוסף על הפריט או קראו לעזרה')).toBeVisible();
   
   if (action === 'Help') {
     await window.getByRole('button', { name: 'help circle outline עזרה' }).click();
@@ -243,7 +243,7 @@ export const changePrice = async (barcode, productText, newPrice,weightableItem)
   await window.getByText('₪${formattedNumber}').first();
   await window.getByRole('button', { name: 'עדכון וסיום' }).click();
   await expect(window.getByText('המחיר עודכן בהצלחהלחצו על "המשיכו בקניות" לחזור לסל')).toBeVisible();
-  await window.getByRole('button', { name: 'המשיכו בקניות' }).click();
+  await window.getByRole('button', { name: 'לחזור לסל הקניות' }).click();
 };
 
 ////Weight Mismatch////
@@ -253,7 +253,7 @@ export const weightMismatch  = async (remove) => {
     await expect(window.getByText('הפריט שרציתם להסיר אינו תואם את הפריט שהוצא מהעגלה.>br')).toBeVisible();
     await expect(window.locator('app-alert-location-embedded div').filter({ hasText: 'Alert Circle' }).nth(1)).toBeVisible();
   } else {
-    await expect(window.locator('#basket div').filter({ hasText: 'המוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו ' }).nth(1)).toBeVisible();
+    await expect(window.locator('#basket div').filter({ hasText: 'הפריט שהונח אינו תואם לפריט שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו ' }).nth(1)).toBeVisible();
     //await expect(window.getByText('הכניסו את הפריט לעגלה')).toBeVisible();
     await expect(window.getByRole('button', { name: 'ביטול הוספה' })).toBeVisible(); 
   }
@@ -377,7 +377,7 @@ export const importTrs = async (store) => {
   const { window } = sharedContext;
   await window.getByText('ייבוא עסקה').click();
   await expect(window.getByText('Closeייבוא עסקה')).toBeVisible();
-  await expect(window.getByText('הזינו את מספר הקופה או עגלה בה נוצרה העסקה שתרצו לשחזר')).toBeVisible();
+  await expect(window.getByText('יש להקיש את מספר העגלה התקולה ולאחר מכן את מספר הסניף')).toBeVisible();
   //await window.locator("xpath=/html/body/app-root/ion-app/ion-modal[2]/app-process-modal/div/div/div/app-process-type-barcode/app-digit-keyboard/div/div/div[2]").getByText('1').click();
   for (let digit of store) {
     if (digit === '1'){
@@ -398,9 +398,9 @@ export const approveImbalance = async (placeWeight) => {
   if (placeWeight==='placeWeight') {
     //
   } else {
-    await expect(window.getByText('Alert Circleהמוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
+    await expect(window.getByText('Alert Circleהפריט שהונח אינו תואם לפריט שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
   }
-  //await expect(window.getByText('Alert Circleהמוצר שהונח אינו תואם למוצר שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
+  //await expect(window.getByText('Alert Circleהפריט שהונח אינו תואם לפריט שניסיתם להוסיף.הוציאו את הפריט שהונח, והניחו במקומו את הפריט שסרקתם או בחרתם')).toBeVisible();
   await scanAdminBarcode();
   await window.waitForTimeout(2000);
   await window.getByText('אישור חוסר איזון בעגלה').click();
@@ -428,7 +428,7 @@ export const paymentScreen  = async (payment,number) => {
   {
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
-  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
+  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלניתן לחזור לסל הקניות על ידי לחיצה על ')).toBeVisible();
   await window.waitForTimeout(30000);
   await expect(window.locator('app-payment-error div').nth(1)).toBeVisible();
   await expect(window.getByText('לא הצלחנו להתחבר למערכת התשלום')).toBeVisible();

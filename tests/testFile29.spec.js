@@ -249,7 +249,7 @@ await runTest(async (testInfo) => {
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
-  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
+  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלניתן לחזור לסל הקניות על ידי לחיצה על ')).toBeVisible();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(30000);
@@ -287,7 +287,7 @@ await runTest(async (testInfo) => {
   await expect(window.locator('div').filter({ hasText: /^תווי שי$/ }).first()).toBeVisible();
   await window.getByRole('img', { name: 'כרטיס אשראי' }).click();
   await expect(window.getByText('תשלום בכרטיס אשראי')).toBeVisible();
-  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלבמידת הצורך ניתן לבטל את התשלום דרך המ')).toBeVisible();
+  await expect(window.getByText('העבירו את כרטיס האשראי במכשיר התשלום משמאלניתן לחזור לסל הקניות על ידי לחיצה על ')).toBeVisible();
   weightCalc = weightCalc + ghostWeight1;
   await sendSecurityScale(weightCalc); //ghost weight
   await window.waitForTimeout(30000);
